@@ -6,7 +6,8 @@ using HWDoublyLinkedList.DoublyLinkedList.Application;
 
 namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 {
-    public sealed class DoublyList {
+    public sealed class DoublyList : IEnumerable<LinkedListNode>
+    {
         private List DoublyLinkedList;
         private ListEnumerator ListEnumerator;
         public int Count { get; set; }
@@ -18,7 +19,15 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             Count = DoublyLinkedList.GetCout();
         }
 
-        public ListEnumerator GetEnumerator() => ListEnumerator;
+        public IEnumerator<LinkedListNode> GetEnumerator()
+        {
+            return ListEnumerator;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 
 }

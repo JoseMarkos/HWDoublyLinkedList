@@ -6,41 +6,41 @@ using HWDoublyLinkedList.Node.Domain;
 
 namespace HWDoublyLinkedList.DoublyLinkedList.Application
 {
-    public sealed class ListEnumerator : IEnumerator<int>
+    public sealed class ListEnumerator : IEnumerator<LinkedListNode>
     {
         private List DoublyList;
         private LinkedListNode Indirect;
         private LinkedListNode _indirect;
-        private static int _current;
+        private LinkedListNode _current;
 
         public static int Count {get; private set;}
 
         public ListEnumerator(List injectList) {
             DoublyList = injectList;
 
-            LinkedListNode HeadNode = (LinkedListNode)DoublyList.Head;
-
-            System.Console.WriteLine(HeadNode.Data);
             unsafe {
+                fixed (LinkedListNode* HeadNode = &DoublyList.Head)
+
                 Indirect = new LinkedListNode()
                 {
-                    Next = &HeadNode,
+                    Data = 0,
+                    Next = HeadNode,
                     Prev = null
                 };
-
-                _indirect= Indirect;
             }
-            
-            System.Console.WriteLine(_indirect.Data + " from construct");
+
+            _current = new LinkedListNode();
         }
 
-        public int Current {
+        public LinkedListNode Current {
             get
             {
                 unsafe {
-                    if (Indirect.Equals(null))
+                    LinkedListNode hola = new LinkedListNode();
+
+                    if ((*Indirect.Next).Equals(hola))
                     {
-                        throw new InvalidOperationException();
+                        return _current;
                     }
 
                     return _current;
@@ -49,7 +49,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
         }
 
         object IEnumerator.Current {
-            get { return Current; }
+            get { return 5; }
         } 
 
         public void Dispose()
@@ -61,15 +61,16 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
         {
             unsafe 
             {
-                if (!(*Indirect.Next).Equals(null)) 
+                LinkedListNode hola = new LinkedListNode();
+
+                System.Console.WriteLine("indirect next data " + (*Indirect.Next).Data);
+                System.Console.WriteLine("Indirect data " + Indirect.Data);
+                
+                if (!(*Indirect.Next).Equals(hola)) 
                 {
-                    LinkedListNode _ = (*Indirect.Next);
+                    _current = (*Indirect.Next);
 
-                    _current = _.Data;
-                    
-                    Indirect = (*Indirect.Next); 
-
-                    System.Console.WriteLine("wth current " + _current);
+                    System.Console.WriteLine("wth current " + _current.Data);
 
                     return true;
                 }

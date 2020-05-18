@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using HWDoublyLinkedList.DoublyLinkedList.Domain;
+using HWDoublyLinkedList.Node.Domain;
 
 namespace HWDoublyLinkedList 
 {
@@ -8,14 +9,17 @@ namespace HWDoublyLinkedList
         public static void Print(DoublyList list)
         {
 
-            IEnumerator<int> enumerator = list.GetEnumerator();
+            IEnumerator<LinkedListNode> enumerator = list.GetEnumerator();
             System.Console.WriteLine(list.Count + " List count \n");
 
-            for (int i = list.Count; i > 0; i--)
+            for (int i = list.Count; i > 1; i--)
             {
                 enumerator.MoveNext();
-                System.Console.WriteLine(enumerator.Current + " eee current");
-                System.Console.WriteLine(enumerator.Current + " eee current");
+                unsafe
+                {
+                    System.Console.WriteLine(enumerator.Current.Data + " eee current");
+                }
+                System.Console.WriteLine(enumerator.Current.Data + " eee current");
             }
                 
             System.Console.WriteLine(list.Count + " List count \n");

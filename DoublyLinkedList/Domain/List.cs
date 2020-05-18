@@ -6,15 +6,14 @@ using HWDoublyLinkedList.DoublyLinkedList.Application;
 
 namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 {
-    public sealed class List
+    public sealed class List : IEnumerable<LinkedListNode>
     {
-        public LinkedListNode? Head;
-        public LinkedListNode? Tail;
+        public LinkedListNode Head;
+        public LinkedListNode Tail;
         public static int Count {get; private set;}
 
         public List () {
-            Head = null;
-            Tail = null;
+            Head = new LinkedListNode();
             Count = 0;
         }
 
@@ -25,19 +24,14 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
                 NewNode.Data = data;
                 Count++;
 
-                System.Console.WriteLine("insert first: " + NewNode.Data );
+                LinkedListNode PreviousNode = Head;
+                LinkedListNode* PreviousNodeLink = &PreviousNode;
 
-                if (Head is null ){
-                    Head = NewNode;
-                    Tail = NewNode;
-                    return;
-                }
+                &Head = &NewNode;
+                   
 
-                LinkedListNode HeadNode = (LinkedListNode)Head;
 
-                NewNode.Next = HeadNode.Next;
 
-                Head = NewNode;
 
                 System.Console.WriteLine("insert first head data: " + ((LinkedListNode)Head).Data);
             }
@@ -45,21 +39,31 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 
         // Beta
         private void SetLast(LinkedListNode node) {
-            unsafe {
-                LinkedListNode indirect = (LinkedListNode)Head;
+            //unsafe {
+            //    LinkedListNode indirect = (LinkedListNode)Head;
     
-                // while(indirect.Next != null)
-                //     indirect = (*indirect.Next);
+            //    // while(indirect.Next != null)
+            //    //     indirect = (*indirect.Next);
 
-                indirect.Next = &node;
-                Tail = node;
+            //    indirect.Next = &node;
+            //    Tail = node;
 
-                node.Prev = &indirect;
-            }
+            //    node.Prev = &indirect;
+            //}
         }
 
         public int GetCout() {
             return Count;
+        }
+
+        public IEnumerator<LinkedListNode> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }
