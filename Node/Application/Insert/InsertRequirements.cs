@@ -5,9 +5,9 @@ namespace HWDoublyLinkedList.Node.Application.Insert
 {
     public interface InsertRequirements
     {
-        void InsertFirst(LinkedListNode node);
-        void InsertLast(LinkedListNode node);
-        void InsertAfterFirst(LinkedListNode node); // If the list is empty not do it
-        void InsertBeforeLast(LinkedListNode node); // If the list is empty not do it
+        void InsertFirst(int data);
+        void InsertLast(int data);
+        void InsertAfterFirst(int data); // If the list is empty not do it
+        void InsertBeforeLast(int data); // If the list is empty not do it
     }
 }

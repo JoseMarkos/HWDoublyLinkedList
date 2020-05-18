@@ -13,22 +13,24 @@ namespace HWDoublyLinkedList.Node.Application.Insert
             List = list;
         }
 
-        public void InsertAfterFirst(LinkedListNode node)
-        {
-            List.Head.Next = node;
-        }
-
-        public void InsertBeforeLast(LinkedListNode node)
+        public void InsertAfterFirst(int data)
         {
             throw new NotImplementedException();
         }
 
-        public void InsertFirst(LinkedListNode node)
+        public void InsertBeforeLast(int data)
         {
-            List.Head = node;
+            throw new NotImplementedException();
         }
 
-        public void InsertLast(LinkedListNode node)
+        public void InsertFirst(int data)
+        {
+            
+            throw new NotImplementedException();
+            
+        }
+
+        public void InsertLast(int data)
         {
             throw new NotImplementedException();
         }
