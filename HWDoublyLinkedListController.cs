@@ -1,6 +1,6 @@
 using System;
 using HWDoublyLinkedList.DoublyLinkedList.Domain;
-using System.Collections.Generic;
+using HWDoublyLinkedList.DoublyLinkedList.Application;
 
 namespace HWDoublyLinkedList 
 {
@@ -12,11 +12,9 @@ namespace HWDoublyLinkedList
             list.InsertFirst(3);
             list.InsertFirst(4);
             list.InsertFirst(5);
+            list.InsertFirst(6);
 
-            DoublyList doublyList = new DoublyList(list);
-
-            Printer.Print(doublyList);
-
+            Printer.Print(list);
         }
     }
 }

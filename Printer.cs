@@ -1,28 +1,26 @@
 using System;
 using System.Collections.Generic;
+using HWDoublyLinkedList.DoublyLinkedList.Application;
 using HWDoublyLinkedList.DoublyLinkedList.Domain;
 using HWDoublyLinkedList.DoublyLinkedNode.Domain;
 
 namespace HWDoublyLinkedList 
 {
     sealed class Printer {
-        public static void Print(DoublyList list)
+        public static void Print(List list)
         {
+            ListEnumerable enumerable = new ListEnumerable(list);
 
-            IEnumerator<Node> enumerator = list.GetEnumerator();
-            System.Console.WriteLine(list.Count + " List count \n");
+            IEnumerator<Node> enumerator = enumerable.GetEnumerator();
 
-            for (int i = list.Count; i > 1; i--)
+            for (int i = enumerable.List.Count; i > 0; i--)
             {
+                System.Console.WriteLine("\n i " + i);
                 enumerator.MoveNext();
-                unsafe
-                {
-                    System.Console.WriteLine(enumerator.Current.Data + " eee current");
-                }
                 System.Console.WriteLine(enumerator.Current.Data + " eee current");
             }
                 
-            System.Console.WriteLine(list.Count + " List count \n");
+            System.Console.WriteLine(enumerable.List.Count + " List count \n");
         }
     }
 }

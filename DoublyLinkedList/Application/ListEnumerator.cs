@@ -8,15 +8,15 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
 {
     public sealed class ListEnumerator : IEnumerator<Node>
     {
-        private List DoublyList;
-        private Node Indirect;
+        private List Source;
+        private unsafe Node* Indirect;
         private Node _current;
 
         public static int Count {get; private set;}
 
-        public ListEnumerator(List injectList) {
-            DoublyList = injectList;
+        public ListEnumerator(List list) {
             _current = new Node();
+            Source = list;
         }
 
         public Node Current {
@@ -24,8 +24,8 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
             {
                 unsafe {
                     Node hola = new Node();
-
-                    if ((*DoublyList.Head.Next).Equals(hola))
+    
+                    if ((hola).Equals(hola))
                     {
                         return _current;
                     }
@@ -36,7 +36,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
         }
 
         object IEnumerator.Current {
-            get { return 5; }
+            get { return this.Current; }
         } 
 
         public void Dispose()
@@ -50,20 +50,9 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
             {
                 Node hola = new Node();
 
-                if (!(DoublyList.Head).Equals(hola))
+                if (!(hola).Equals(hola))
                 {
-                    fixed(Node* HeadLink = &DoublyList.Head){
-                        Node* PrevLink = HeadLink;
-                        
-                        fixed(Node* CurrentLink = &_current) {
-                            Node* other = CurrentLink;
-
-                            other = (*PrevLink).Next;
-                        }
-    
-                        System.Console.WriteLine((*PrevLink).Data);
-                        System.Console.WriteLine("wth current " + (*PrevLink));
-                    }
+                   
 
                     return true;
                 }
