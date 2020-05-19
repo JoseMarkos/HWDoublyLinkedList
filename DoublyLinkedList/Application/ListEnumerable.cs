@@ -13,12 +13,15 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
 
         public ListEnumerable (List list) {
             List = list;
-            ListEnumerator = new ListEnumerator(List);
+            ListEnumerator = new ListEnumerator(list);
         }
 
         public IEnumerator<Node> GetEnumerator()
         {
-            return ListEnumerator;
+            foreach (Node theAnimal in List)
+            {
+                yield return theAnimal;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
