@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using HWDoublyLinkedList.Node.Domain;
+using HWDoublyLinkedList.DoublyLinkedNode.Domain;
 using HWDoublyLinkedList.DoublyLinkedList.Application;
 
 namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 {
-    public sealed class DoublyList : IEnumerable<LinkedListNode>
+    public sealed class DoublyList : IEnumerable<Node>
     {
         private List DoublyLinkedList;
         private ListEnumerator ListEnumerator;
@@ -19,7 +19,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             Count = DoublyLinkedList.GetCout();
         }
 
-        public IEnumerator<LinkedListNode> GetEnumerator()
+        public IEnumerator<Node> GetEnumerator()
         {
             return ListEnumerator;
         }

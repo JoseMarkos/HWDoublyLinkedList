@@ -2,43 +2,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using HWDoublyLinkedList.DoublyLinkedList.Domain;
-using HWDoublyLinkedList.Node.Domain;
+using HWDoublyLinkedList.DoublyLinkedNode.Domain;
 
 namespace HWDoublyLinkedList.DoublyLinkedList.Application
 {
-    public sealed class ListEnumerator : IEnumerator<LinkedListNode>
+    public sealed class ListEnumerator : IEnumerator<Node>
     {
         private List DoublyList;
-        private LinkedListNode Indirect;
-        private LinkedListNode _indirect;
-        private LinkedListNode _current;
+        private Node Indirect;
+        private Node _current;
 
         public static int Count {get; private set;}
 
         public ListEnumerator(List injectList) {
             DoublyList = injectList;
-
-            unsafe {
-                fixed (LinkedListNode* HeadNode = &DoublyList.Head)
-
-                Indirect = new LinkedListNode()
-                {
-                    Data = 0,
-                    Next = HeadNode,
-                    Prev = null
-                };
-            }
-
-            _current = new LinkedListNode();
+            _current = new Node();
         }
 
-        public LinkedListNode Current {
+        public Node Current {
             get
             {
                 unsafe {
-                    LinkedListNode hola = new LinkedListNode();
+                    Node hola = new Node();
 
-                    if ((*Indirect.Next).Equals(hola))
+                    if ((*DoublyList.Head.Next).Equals(hola))
                     {
                         return _current;
                     }
@@ -61,16 +48,22 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
         {
             unsafe 
             {
-                LinkedListNode hola = new LinkedListNode();
+                Node hola = new Node();
 
-                System.Console.WriteLine("indirect next data " + (*Indirect.Next).Data);
-                System.Console.WriteLine("Indirect data " + Indirect.Data);
-                
-                if (!(*Indirect.Next).Equals(hola)) 
+                if (!(DoublyList.Head).Equals(hola))
                 {
-                    _current = (*Indirect.Next);
+                    fixed(Node* HeadLink = &DoublyList.Head){
+                        Node* PrevLink = HeadLink;
+                        
+                        fixed(Node* CurrentLink = &_current) {
+                            Node* other = CurrentLink;
 
-                    System.Console.WriteLine("wth current " + _current.Data);
+                            other = (*PrevLink).Next;
+                        }
+    
+                        System.Console.WriteLine((*PrevLink).Data);
+                        System.Console.WriteLine("wth current " + (*PrevLink));
+                    }
 
                     return true;
                 }

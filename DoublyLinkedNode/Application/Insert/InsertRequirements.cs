@@ -1,7 +1,7 @@
 using System;
-using HWDoublyLinkedList.Node.Domain;
+using HWDoublyLinkedList.DoublyLinkedNode.Domain;
 
-namespace HWDoublyLinkedList.Node.Application.Insert
+namespace HWDoublyLinkedList.DoublyLinkedNode.Application.Insert
 {
     public interface InsertRequirements
     {

@@ -1,46 +1,44 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using HWDoublyLinkedList.Node.Domain;
+using HWDoublyLinkedList.DoublyLinkedNode.Domain;
 using HWDoublyLinkedList.DoublyLinkedList.Application;
 
 namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 {
-    public sealed class List : IEnumerable<LinkedListNode>
+    public sealed class List : IEnumerable<Node>
     {
-        public LinkedListNode Head;
-        public LinkedListNode Tail;
+        public Node Head;
+        public Node Tail;
         public static int Count {get; private set;}
 
         public List () {
-            Head = new LinkedListNode();
+            Head = new Node();
             Count = 0;
         }
 
         public void InsertFirst(int data)
         {
-            unsafe {
-                LinkedListNode NewNode = new LinkedListNode();
-                NewNode.Data = data;
+            unsafe 
+            {
                 Count++;
+                
+                Node NewNode = new Node();
+                NewNode.Data = data;
+                Node* NewNodeLink = &NewNode;
 
-                LinkedListNode PreviousNode = Head;
-                LinkedListNode* PreviousNodeLink = &PreviousNode;
-
-                &Head = &NewNode;
-                   
-
-
-
-
-                System.Console.WriteLine("insert first head data: " + ((LinkedListNode)Head).Data);
+                fixed(Node* HeadLink = &Head) {
+                    NewNode.Next = HeadLink;
+                    Node* PrevLink = HeadLink;
+                    PrevLink = NewNodeLink;
+                }
             }
         }
 
         // Beta
-        private void SetLast(LinkedListNode node) {
+        private void SetLast(Node node) {
             //unsafe {
-            //    LinkedListNode indirect = (LinkedListNode)Head;
+            //    Node indirect = (Node)Head;
     
             //    // while(indirect.Next != null)
             //    //     indirect = (*indirect.Next);
@@ -56,7 +54,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             return Count;
         }
 
-        public IEnumerator<LinkedListNode> GetEnumerator()
+        public IEnumerator<Node> GetEnumerator()
         {
             throw new NotImplementedException();
         }

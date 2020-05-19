@@ -1,26 +1,26 @@
 using System;
-using HWDoublyLinkedList.Node.Domain;
+using HWDoublyLinkedList.DoublyLinkedNode.Domain;
 
-namespace HWDoublyLinkedList.Node.Application.Delete 
+namespace HWDoublyLinkedList.DoublyLinkedNode.Application.Delete 
 {
     public sealed class DeleteNode : DeleteRequirements
     {
-        public void DeleteAfterFirst(LinkedListNode node)
+        public void DeleteAfterFirst(Node node)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteBiggest(LinkedListNode node)
+        public void DeleteBiggest(Node node)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteFirst(LinkedListNode node)
+        public void DeleteFirst(Node node)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteLast(LinkedListNode node)
+        public void DeleteLast(Node node)
         {
             throw new NotImplementedException();
         }
