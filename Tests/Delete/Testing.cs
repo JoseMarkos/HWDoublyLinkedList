@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using HWDoublyLinkedList.DoublyLinkedList.Application;
 using HWDoublyLinkedList.DoublyLinkedList.Domain;
@@ -63,6 +64,48 @@ namespace HWDoublyLinkedList.Tests.Delete {
             }
 
             Assert.Equal(last, enumerator.Current);
+        }
+
+        [Fact]
+        public void DeleteAfterFirst() {
+            List list = AddFirstAddAfterFirstAddAfterFirst();
+
+            Node nodeAfterFirstNext = list.Mooc.Next.Next.Next;
+            list.DeleteAfterFirst();
+
+            Assert.Equal(nodeAfterFirstNext, list.Mooc.Next.Next);
+        }
+
+        [Fact]
+        public void DeleteAfterFirstCountOne() {
+            List list = new List();
+
+            Node newNode = new Node();
+            newNode.Data = 1;
+
+            list.InsertFirst(newNode);
+
+            Assert.Throws<ArgumentOutOfRangeException>(
+                ()=> list.DeleteAfterFirst()
+            );
+        }
+        
+        [Fact]
+        public void DeleteAfterFirstCountTwo() {
+            List list = new List();
+
+            Node newNode = new Node();
+            newNode.Data = 1;
+
+            list.InsertFirst(newNode);
+
+            Node newNode2 = new Node();
+            newNode2.Data = 2;
+
+            list.InsertFirst(newNode2);
+            list.DeleteAfterFirst();
+
+            Assert.Null(list.Mooc.Next.Next);
         }
     }
 }

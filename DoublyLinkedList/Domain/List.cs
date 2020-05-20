@@ -52,11 +52,13 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 
         public void DeleteAfterFirst()
         {
-            throw new NotImplementedException();
+            Delete.DeleteAfterFirst(ref Mooc);
+            Count--;
         }
 
         public void DeleteBiggest()
         {
+            Count--;
             throw new NotImplementedException();
         }
 
