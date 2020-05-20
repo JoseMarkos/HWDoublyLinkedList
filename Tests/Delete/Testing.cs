@@ -33,5 +33,36 @@ namespace HWDoublyLinkedList.Tests.Delete {
 
             Assert.Equal(nodeAfterFirst, list.Mooc.Next);
         }
+
+        [Fact]
+        public void DeleteLast() {
+            List list = AddFirstAddAfterFirstAddAfterFirst();
+
+            Node nodeAfterFirst = list.Mooc.Next.Next;
+
+            ListEnumerable enumerable = new ListEnumerable(list);
+            IEnumerator<Node> enumerator = enumerable.GetEnumerator();
+
+            Node last = new Node();
+
+            while(enumerator.MoveNext())
+            {
+            }
+
+            last = enumerator.Current.Prev;
+            
+            list.DeleteLast();
+
+            enumerator.Dispose();
+
+            // ListEnumerable enumerable2 = new ListEnumerable(list);
+            // IEnumerator<Node> enumerator2 = enumerable2.GetEnumerator();
+            
+            while(enumerator.MoveNext())
+            {
+            }
+
+            Assert.Equal(last, enumerator.Current);
+        }
     }
 }

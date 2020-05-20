@@ -5,12 +5,12 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application.Delete
 {
     public sealed class DeleteNode : DeleteRequirements
     {
-        public void DeleteAfterFirst(Node node, ref Node ghost)
+        public void DeleteAfterFirst(ref Node ghost)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteBiggest(Node node, ref Node ghost)
+        public void DeleteBiggest(ref Node ghost)
         {
             throw new NotImplementedException();
         }
@@ -21,9 +21,18 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application.Delete
             ghost.Next = ghost.Next.Next;
         }
 
-        public void DeleteLast(Node node, ref Node ghost)
+        public void DeleteLast(ref Node ghost)
         {
-            throw new NotImplementedException();
+            ListEnumerator enumerator = new ListEnumerator(ghost);
+            Node last = new Node();
+
+            while(enumerator.MoveNext()) 
+            {
+            }
+            
+            last = enumerator.Current;
+
+            enumerator.Current.Prev.Next = null;
         }
     }
 }

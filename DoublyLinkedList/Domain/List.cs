@@ -50,12 +50,12 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             Count++;
         }
 
-        public void DeleteAfterFirst(Node oldNode)
+        public void DeleteAfterFirst()
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteBiggest(Node oldNode)
+        public void DeleteBiggest()
         {
             throw new NotImplementedException();
         }
@@ -66,9 +66,10 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             Count--;
         }
 
-        public void DeleteLast(Node oldNode)
+        public void DeleteLast()
         {
-            throw new NotImplementedException();
+            Delete.DeleteLast(ref Mooc);
+            Count--;
         }
     }
 }

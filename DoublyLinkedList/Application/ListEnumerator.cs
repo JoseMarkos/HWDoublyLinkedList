@@ -21,11 +21,13 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
         }
 
         private Node _current;
+        private Node noteReseted;
 
         public static int Count {get; private set;}
 
         public ListEnumerator(Node node) {
             _current = node;
+            noteReseted = node;
         }
 
         public Node Current {
@@ -43,7 +45,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _current = noteReseted;
         }
 
         public bool MoveNext()
