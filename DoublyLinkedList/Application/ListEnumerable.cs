@@ -18,10 +18,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
 
         public IEnumerator<Node> GetEnumerator()
         {
-            foreach (Node theAnimal in List)
-            {
-                yield return theAnimal;
-            }
+            return ListEnumerator;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

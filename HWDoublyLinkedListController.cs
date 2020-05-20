@@ -9,10 +9,7 @@ namespace HWDoublyLinkedList
         public static void Show() 
         {
             List list = new List();
-            list.InsertFirst(3);
-            list.InsertFirst(4);
-            list.InsertFirst(5);
-            list.InsertFirst(6);
+
 
             Printer.Print(list);
         }

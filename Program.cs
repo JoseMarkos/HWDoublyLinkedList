@@ -8,7 +8,9 @@ namespace HWDoublyLinkedList
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            HWDoublyLinkedListController.Show();
+            //HWDoublyLinkedListController.Show();
+
+          
         }
     }
 }

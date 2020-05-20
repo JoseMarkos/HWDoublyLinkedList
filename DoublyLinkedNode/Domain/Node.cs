@@ -2,11 +2,10 @@ using System;
 
 namespace HWDoublyLinkedList.DoublyLinkedNode.Domain
 {
-    public struct Node
+    public class Node
     {
         public int Data;
-
-        public unsafe Node* Prev;
-        public unsafe Node* Next;
+        public  Node Prev;
+        public  Node Next;
     }
 }

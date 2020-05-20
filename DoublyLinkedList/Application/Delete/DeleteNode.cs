@@ -1,7 +1,7 @@
 using System;
 using HWDoublyLinkedList.DoublyLinkedNode.Domain;
 
-namespace HWDoublyLinkedList.DoublyLinkedNode.Application.Delete 
+namespace HWDoublyLinkedList.DoublyLinkedList.Application.Delete 
 {
     public sealed class DeleteNode : DeleteRequirements
     {

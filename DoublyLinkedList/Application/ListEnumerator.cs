@@ -9,7 +9,6 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
     public sealed class ListEnumerator : IEnumerator<Node>
     {
         private List Source;
-        private unsafe Node* Indirect;
         private Node _current;
 
         public static int Count {get; private set;}

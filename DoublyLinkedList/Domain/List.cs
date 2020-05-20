@@ -3,73 +3,40 @@ using HWDoublyLinkedList.DoublyLinkedNode.Domain;
 using HWDoublyLinkedList.DoublyLinkedList.Application;
 using System.Collections.Generic;
 using System.Collections;
+using HWDoublyLinkedList.DoublyLinkedList.Application.Insert;
+using HWDoublyLinkedList.DoublyLinkedList.Application.Delete;
 
 namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 {
-    public sealed class List : ICollection
+    public sealed class List 
     {
-        private List<Node> innerCol;
+        public unsafe Node Mooc;
         public unsafe Node Head;
         public Node Tail;
-        public unsafe Node* CurrentLink;
         public int Count {get; private set;}
+        private InsertNode Insert;
+        private DeleteNode Delete;
 
-        public bool IsSynchronized => throw new NotImplementedException();
-
-        public object SyncRoot => throw new NotImplementedException();
-
-        public List () {
+        public List () 
+        {
             Count = 0;
-            innerCol = new List<Node>();
-            unsafe {
-                fixed (Node* HeadLink  = &Head) {
-                    innerCol.Add(*HeadLink);
-                }
-            }
+            Mooc = new Node();
+            Mooc.Data = 10;
+            Head = new Node();
+            Insert =  new InsertNode();
+            Delete =  new DeleteNode();
         }
 
-        public void InsertFirst(int data)
+        public void InsertFirst(Node newNode)
         {
-            unsafe 
-            {
-                Node NewNode = new Node();
-                NewNode.Data = data;
-                Node* NewNodeLink = &NewNode;
-
-                if(innerCol.Count > 1) 
-                {
-
-                    innerCol.Add(*NewNodeLink);
-                     
-                }
-
-                innerCol.Add(*NewNodeLink);
-
-
-
-                System.Console.WriteLine(Head.Data  + " head data pointer");
-                System.Console.WriteLine((*NewNodeLink).Data  + " head data pointer");
-                Count++;
-            }
+            Insert.InsertFirst(newNode, ref Mooc);
+            Count++;
         }
 
-        public int GetCout() {
-            return Count;
-        }
-
-        public void CopyTo(Array array, int index)
+        public void InserAftertFirst(Node newNode)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            return new ListEnumerator(this);
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return new ListEnumerator(this);
+            Insert.InsertAfterFirst(newNode, ref Mooc);
+            Count++;
         }
     }
 }
