@@ -14,10 +14,16 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application.Insert
              
                 newNode.Next = indirect;
                 newNode.Prev = indirect.Prev;
+
+                current.Next.Next = newNode;
+                current.Next.Next.Next.Prev = newNode;
+
             }
 
-            current.Next.Next = newNode;
-            current.Next.Next.Prev = current.Next;
+            else {
+                current.Next.Next = newNode;
+                current.Next.Next.Prev = current.Next;
+            }
         }
 
         public void InsertBeforeLast(Node newNode, ref Node current)
