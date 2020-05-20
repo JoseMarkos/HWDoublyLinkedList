@@ -32,13 +32,6 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
             get
             {
                 unsafe {
-                    Node hola = new Node();
-    
-                    if ((hola).Equals(hola))
-                    {
-                        return _current;
-                    }
-
                     return _current;
                 }
             }

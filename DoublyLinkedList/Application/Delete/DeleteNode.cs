@@ -5,22 +5,23 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application.Delete
 {
     public sealed class DeleteNode : DeleteRequirements
     {
-        public void DeleteAfterFirst(Node node)
+        public void DeleteAfterFirst(Node node, ref Node ghost)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteBiggest(Node node)
+        public void DeleteBiggest(Node node, ref Node ghost)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteFirst(Node node)
+        public void DeleteFirst(ref Node ghost)
         {
-            throw new NotImplementedException();
+            ghost.Next.Next.Prev = ghost;
+            ghost.Next = ghost.Next.Next;
         }
 
-        public void DeleteLast(Node node)
+        public void DeleteLast(Node node, ref Node ghost)
         {
             throw new NotImplementedException();
         }

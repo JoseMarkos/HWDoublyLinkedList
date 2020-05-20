@@ -5,9 +5,9 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application.Delete
 {
     public interface DeleteRequirements
     {
-        void DeleteFirst(Node node);
-        void DeleteLast(Node node);
-        void DeleteAfterFirst(Node node);
-        void DeleteBiggest(Node node);
+        void DeleteFirst(ref Node ghost);
+        void DeleteLast(Node node, ref Node ghost);
+        void DeleteAfterFirst(Node node, ref Node ghost);
+        void DeleteBiggest(Node node, ref Node ghost);
     }
 }

@@ -49,5 +49,26 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             Insert.InsertBeforeLast(newNode, ref Mooc);
             Count++;
         }
+
+        public void DeleteAfterFirst(Node oldNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteBiggest(Node oldNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteFirst()
+        {
+            Delete.DeleteFirst(ref Mooc);
+            Count--;
+        }
+
+        public void DeleteLast(Node oldNode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
