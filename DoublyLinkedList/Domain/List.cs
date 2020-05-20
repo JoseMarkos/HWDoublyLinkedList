@@ -38,5 +38,16 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             Insert.InsertAfterFirst(newNode, ref Mooc);
             Count++;
         }
+
+        public void InsertLast(Node newNode) {
+            Insert.InsertLast(newNode, ref Mooc);
+            Tail = newNode;
+            Count++;
+        }
+
+        public void InsertBeforeLast(Node newNode) {
+            Insert.InsertBeforeLast(newNode, ref Mooc);
+            Count++;
+        }
     }
 }

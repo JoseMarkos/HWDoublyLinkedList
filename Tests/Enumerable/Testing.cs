@@ -3,6 +3,7 @@ using HWDoublyLinkedList.DoublyLinkedNode.Domain;
 using HWDoublyLinkedList.DoublyLinkedList.Application;
 using Microsoft.VisualStudio.TestPlatform;
 using Xunit;
+using System.Collections.Generic;
 
 namespace HWDoublyLinkedList.Tests.Enumerable {
     public class Testing {
@@ -33,9 +34,19 @@ namespace HWDoublyLinkedList.Tests.Enumerable {
             Assert.Equal(list, enumerable.List);
         }
 
-        [Fact] 
-        public void random() {
+        [Fact]
+        public void EnumeratorMoveNext() {
             List list = AddFirstAddAfterFirstAddAfterFirst();
+
+            ListEnumerable enumerable = new ListEnumerable(list);
+            IEnumerator<Node> enumerator = enumerable.GetEnumerator();
+
+            enumerator.MoveNext();
+            enumerator.MoveNext();
+            enumerator.MoveNext();
+            enumerator.MoveNext();
+
+            Assert.Equal(3, enumerator.Current.Data);
         }
     }
 }

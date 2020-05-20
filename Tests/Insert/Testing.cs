@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using HWDoublyLinkedList.DoublyLinkedList.Application;
 using HWDoublyLinkedList.DoublyLinkedList.Domain;
 using HWDoublyLinkedList.DoublyLinkedNode.Domain;
 using Microsoft.VisualStudio.TestPlatform;
@@ -238,6 +240,53 @@ namespace HWDoublyLinkedList.Tests.Insert {
             list.InserAftertFirst(newNode3);
 
             return list;
+        }
+
+        [Fact]
+        public void InsertLast() {
+            List list = AddFirstAddAfterFirstAddAfterFirst();
+            Node newNode = new Node();
+            newNode.Data = 8;
+
+            list.InsertLast(newNode);
+
+            ListEnumerable enumerable = new ListEnumerable(list);
+            IEnumerator<Node> enumerator = enumerable.GetEnumerator();
+
+            Node last = new Node();
+
+            while(enumerator.MoveNext()) 
+            {
+                last = enumerator.Current;
+            }
+
+            Assert.Equal(8, last.Data);
+        }
+    
+        [Fact]
+        public void InsertBeforeLast() {
+            List list = AddFirstAddAfterFirstAddAfterFirst();
+            Node newNode = new Node();
+            newNode.Data = 7;
+
+            list.InsertBeforeLast(newNode);
+
+            ListEnumerable enumerable = new ListEnumerable(list);
+            IEnumerator<Node> enumerator = enumerable.GetEnumerator();
+
+            Node last = new Node();
+
+            while(enumerator.MoveNext()) 
+            {
+            }
+            
+            last = enumerator.Current;  
+            
+            Assert.Equal(3, last.Data);
+            Assert.Equal(7, last.Prev.Data);
+            Assert.Equal(2, last.Prev.Prev.Data);
+            Assert.Equal(3, last.Prev.Next.Data);
+            Assert.Null(last.Next);
         }
     }
 }

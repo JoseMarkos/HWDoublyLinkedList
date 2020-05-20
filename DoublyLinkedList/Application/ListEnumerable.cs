@@ -13,7 +13,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
 
         public ListEnumerable (List list) {
             List = list;
-            ListEnumerator = new ListEnumerator(list);
+            ListEnumerator = new ListEnumerator(list.Mooc);
         }
 
         public IEnumerator<Node> GetEnumerator()

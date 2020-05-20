@@ -28,7 +28,18 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application.Insert
 
         public void InsertBeforeLast(Node newNode, ref Node current)
         {
-            throw new NotImplementedException();
+            ListEnumerator enumerator = new ListEnumerator(current);
+
+            Node indirect = current;
+
+            while(enumerator.MoveNext()) 
+            {
+            }
+
+            indirect = enumerator.Current;
+            newNode.Prev = indirect.Prev; 
+            newNode.Next = indirect;
+            enumerator.Current.Prev = newNode;
         }
 
         public void InsertFirst(Node newNode, ref Node current)
@@ -46,7 +57,16 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application.Insert
 
         public void InsertLast(Node newNode, ref Node current)
         {
-            throw new NotImplementedException();
+            ListEnumerator enumerator = new ListEnumerator(current);
+            Node last = new Node();
+
+            while(enumerator.MoveNext()) 
+            {
+            }
+            
+            last = enumerator.Current;
+
+            enumerator.Current.Next = newNode;
         }
     }
 }
