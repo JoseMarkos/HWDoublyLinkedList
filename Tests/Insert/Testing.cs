@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using HWDoublyLinkedList.DoublyLinkedList.Application;
 using HWDoublyLinkedList.DoublyLinkedList.Domain;
@@ -79,26 +80,41 @@ namespace HWDoublyLinkedList.Tests.Insert {
         }
 
         [Fact]
-        public void InserAftertFirst()
+        public void InsertAfterFirst()
         {
             List list = GetInsertFirstToListWithOneChild();
             Node HeadHappyCase = list.Head;
 
             Node newNode2 = new Node(3);
 
-            list.InserAftertFirst(newNode2);
+            list.InsertAfterFirst(newNode2);
 
             Node HappyCase = newNode2;
             HappyCase.Prev = HeadHappyCase;
 
             HeadHappyCase.Next = HappyCase;
 
+            System.Console.WriteLine(HappyCase.Prev.Next);
             Assert.Equal(HappyCase, list.Head.Next);
+            Assert.Equal(HappyCase.Prev.Next, list.Head.Next.Prev.Next);
             Assert.Equal(HeadHappyCase, list.Head.Next.Prev);
         }
 
+       [Fact]
+        public void InsertAfterFirstEmptyListCase()
+        {
+            List list = new List();
+            
+            Node newNode = new Node(1);
+
+            Assert.Throws<IndexOutOfRangeException>(()=>
+                list.InsertAfterFirst(newNode)
+                );
+        }
+        
+
         [Fact]
-        public void InserAftertFirstWithThreeItemsHead()
+        public void InsertAfterFirstWithThreeItemsHead()
         {
             List list = AddFirstAddAfterFirstAddAfterFirst();
             // move next
@@ -116,7 +132,7 @@ namespace HWDoublyLinkedList.Tests.Insert {
             List list = AddFirstAddAfterFirstAddAfterFirst();
 
             // Mooc
-            Assert.Equal(10, list.Mooc.Data);
+            Assert.Equal(0, list.Mooc.Data);
             Assert.Equal(1, list.Mooc.Next.Data);
             Assert.Null(list.Mooc.Prev);
         }
@@ -128,7 +144,7 @@ namespace HWDoublyLinkedList.Tests.Insert {
 
             // Head
             Assert.Equal(1, list.Mooc.Next.Data);
-            Assert.Equal(10, list.Mooc.Next.Prev.Data);
+            Assert.Equal(0, list.Mooc.Next.Prev.Data);
             Assert.Equal(2, list.Mooc.Next.Next.Data);
         }
 
@@ -156,66 +172,65 @@ namespace HWDoublyLinkedList.Tests.Insert {
 
         private List AddFirstAddAfterFirstAddAfterFirst() {
             List list = new List();
-            Node newNode = new Node();
+            Node newNode = new Node(1);
             newNode.Data = 1;
             list.InsertFirst(newNode);
 
-            Node newNode2 = new Node();
+            Node newNode2 = new Node(3);
             newNode2.Data = 3;
-            list.InserAftertFirst(newNode2);
+            list.InsertAfterFirst(newNode2);
 
-            Node newNode3 = new Node();
+            Node newNode3 = new Node(2);
             newNode3.Data = 2;
-            list.InserAftertFirst(newNode3);
+            list.InsertAfterFirst(newNode3);
 
             return list;
         }
 
-        [Fact]
-        public void InsertLast() {
-            List list = AddFirstAddAfterFirstAddAfterFirst();
-            Node newNode = new Node();
-            newNode.Data = 8;
+        // [Fact]
+        // public void InsertLast() {
+        //     List list = AddFirstAddAfterFirstAddAfterFirst();
+        //     Node newNode = new Node(8);
+        //     newNode.Data = 8;
 
-            list.InsertLast(newNode);
+        //     list.InsertLast(newNode);
 
-            ListEnumerable enumerable = new ListEnumerable(list);
-            IEnumerator<Node> enumerator = enumerable.GetEnumerator();
+        //     ListEnumerable enumerable = new ListEnumerable(list);
+        //     IEnumerator<Node> enumerator = enumerable.GetEnumerator();
 
-            Node last = new Node();
 
-            while(enumerator.MoveNext()) 
-            {
-                last = enumerator.Current;
-            }
+        //     while(enumerator.MoveNext()) 
+        //     {
+        //     }
 
-            Assert.Equal(8, last.Data);
-        }
+        //     Node last = enumerator.Current;
+            
+        //     Assert.Equal(8, last.Data);
+        // }
     
-        [Fact]
-        public void InsertBeforeLast() {
-            List list = AddFirstAddAfterFirstAddAfterFirst();
-            Node newNode = new Node();
-            newNode.Data = 7;
+        // [Fact]
+        // public void InsertBeforeLast() {
+        //     List list = AddFirstAddAfterFirstAddAfterFirst();
+        //     Node newNode = new Node(7);
+        //     newNode.Data = 7;
 
-            list.InsertBeforeLast(newNode);
+        //     list.InsertBeforeLast(newNode);
 
-            ListEnumerable enumerable = new ListEnumerable(list);
-            IEnumerator<Node> enumerator = enumerable.GetEnumerator();
+        //     ListEnumerable enumerable = new ListEnumerable(list);
+        //     IEnumerator<Node> enumerator = enumerable.GetEnumerator();
 
-            Node last = new Node();
 
-            while(enumerator.MoveNext()) 
-            {
-            }
+        //     while(enumerator.MoveNext()) 
+        //     {
+        //     }
             
-            last = enumerator.Current;  
+        //     Node last = enumerator.Current;  
             
-            Assert.Equal(3, last.Data);
-            Assert.Equal(7, last.Prev.Data);
-            Assert.Equal(2, last.Prev.Prev.Data);
-            Assert.Equal(3, last.Prev.Next.Data);
-            Assert.Null(last.Next);
-        }
+        //     Assert.Equal(3, last.Data);
+        //     Assert.Equal(7, last.Prev.Data);
+        //     Assert.Equal(2, last.Prev.Prev.Data);
+        //     Assert.Equal(3, last.Prev.Next.Data);
+        //     Assert.Null(last.Next);
+        // }
     }
 }

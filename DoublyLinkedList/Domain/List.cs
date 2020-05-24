@@ -8,51 +8,61 @@ using HWDoublyLinkedList.DoublyLinkedList.Application.Delete;
 
 namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 {
-    public sealed class List 
+    public sealed class List : InsertRequirements
     {
         public unsafe Node Mooc;
         public unsafe Node Head;
         public Node Tail;
         public int Count {get; private set;}
-        private InsertNode Insert;
-        private DeleteNode Delete;
 
         public List () 
         {
             Count = 0;
-            Mooc = new Node();
-            Mooc.Data = 10;
-            Head = new Node();
-            Insert =  new InsertNode();
-            Delete =  new DeleteNode();
+            Mooc = new Node(0);
+            Head = null;
+            Tail = null;
         }
 
         public void InsertFirst(Node newNode)
         {
-            Insert.InsertFirst(newNode, ref Mooc);
+            if (Head != null) 
+            {   
+                newNode.Next = Head;
+                newNode.Next.Prev = newNode;
+            }
+
+            Head = newNode; 
+            Mooc.Next = Head;
+
+            if (Tail is null) 
+            {
+                Tail = Head;
+            }
+
             Count++;
         }
-
-        public void InserAftertFirst(Node newNode)
+        
+        public void InsertAfterFirst(Node newNode)
         {
-            Insert.InsertAfterFirst(newNode, ref Mooc);
+            if (Head is null) {
+                throw new IndexOutOfRangeException("The list has no elements");
+            }
+
+            
             Count++;
         }
 
         public void InsertLast(Node newNode) {
-            Insert.InsertLast(newNode, ref Mooc);
             Tail = newNode;
             Count++;
         }
 
         public void InsertBeforeLast(Node newNode) {
-            Insert.InsertBeforeLast(newNode, ref Mooc);
             Count++;
         }
 
         public void DeleteAfterFirst()
         {
-            Delete.DeleteAfterFirst(ref Mooc);
             Count--;
         }
 
@@ -64,13 +74,11 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 
         public void DeleteFirst()
         {
-            Delete.DeleteFirst(ref Mooc);
             Count--;
         }
 
         public void DeleteLast()
         {
-            Delete.DeleteLast(ref Mooc);
             Count--;
         }
     }
