@@ -48,6 +48,13 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
                 throw new IndexOutOfRangeException("The list has no elements");
             }
 
+            bool SetTailFlag = false;
+
+            if (Tail.Equals(Head))
+            {
+                SetTailFlag = true;
+            }
+
             if (Head.Next != null)
             {
                 Head.Next.Prev = newNode;
@@ -57,11 +64,29 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             newNode.Prev = Head;
             Head.Next = newNode;
 
+            if (SetTailFlag) 
+            {
+                Tail = newNode;
+            }
+
             Count++;
         }
 
-        public void InsertLast(Node newNode) {
+        public void InsertLast(Node newNode) 
+        {
+            if (Head is null)
+            {
+                Head = newNode;
+                Tail = newNode;
+
+                return;
+            }
+
+            newNode.Prev = Tail;
+            newNode.Prev.Next = newNode;        
+            
             Tail = newNode;
+
             Count++;
         }
 
