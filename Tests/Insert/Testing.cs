@@ -114,12 +114,12 @@ namespace HWDoublyLinkedList.Tests.Insert {
         
 
         [Fact]
-        public void InsertAfterFirstWithThreeItemsHead()
+        public void InsertAfterFirstWithThreeItems()
         {
             List list = AddFirstAddAfterFirstAddAfterFirst();
             // move next
 
-            Assert.Equal(10, list.Mooc.Data);
+            Assert.Equal(0, list.Mooc.Data);
             Assert.Equal(1, list.Mooc.Next.Data);
             Assert.Equal(2, list.Mooc.Next.Next.Data);
             Assert.Equal(3, list.Mooc.Next.Next.Next.Data);
@@ -127,7 +127,7 @@ namespace HWDoublyLinkedList.Tests.Insert {
 
 
         [Fact]
-        public void AddFirstAddAfterFirstAddAfterFirstMooc()
+        public void InsertAfterFirstWithThreeItemsMooc()
         {
             List list = AddFirstAddAfterFirstAddAfterFirst();
 
@@ -138,18 +138,18 @@ namespace HWDoublyLinkedList.Tests.Insert {
         }
 
         [Fact]
-        public void AddFirstAddAfterFirstAddAfterFirstHead()
+        public void InsertAfterFirstWithThreeItemsHead()
         {
             List list = AddFirstAddAfterFirstAddAfterFirst();
 
             // Head
             Assert.Equal(1, list.Mooc.Next.Data);
-            Assert.Equal(0, list.Mooc.Next.Prev.Data);
+            Assert.Null(list.Mooc.Next.Prev);
             Assert.Equal(2, list.Mooc.Next.Next.Data);
         }
 
         [Fact]
-        public void AddFirstAddAfterFirstAddAfterFirstHeadNext()
+        public void InsertAfterFirstWithThreeItemsHeadNext()
         {
             List list = AddFirstAddAfterFirstAddAfterFirst();
 
@@ -160,7 +160,7 @@ namespace HWDoublyLinkedList.Tests.Insert {
         }
 
         [Fact]
-        public void AddFirstAddAfterFirstAddAfterFirstLastofThree()
+        public void InsertAfterFirstWithThreeItemsLast()
         {
             List list = AddFirstAddAfterFirstAddAfterFirst();
 

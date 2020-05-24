@@ -48,7 +48,15 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
                 throw new IndexOutOfRangeException("The list has no elements");
             }
 
-            
+            if (Head.Next != null)
+            {
+                Head.Next.Prev = newNode;
+                newNode.Next = Head.Next;
+            }
+
+            newNode.Prev = Head;
+            Head.Next = newNode;
+
             Count++;
         }
 

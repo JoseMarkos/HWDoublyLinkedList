@@ -7,5 +7,10 @@ namespace HWDoublyLinkedList.DoublyLinkedNode.Domain
         public int Data;
         public  Node Prev;
         public  Node Next;
+
+        public Node(int info)
+        {
+            Data = info;
+        }
     }
 }
