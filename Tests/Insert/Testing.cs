@@ -31,59 +31,40 @@ namespace HWDoublyLinkedList.Tests.Insert {
         }
 
         [Fact]
-        public void AddHeadToList()
+        public void InsertFirstCountZero()
         {
             List list = new List();
+
             Node newNode = new Node();
             newNode.Data = 3;
 
             list.InsertFirst(newNode);
 
-            Assert.Equal(list.Mooc.Next, newNode);
+            Assert.Equal(list.Mooc.Next.Data, newNode.Data);
             Assert.Equal(list.Mooc.Next.Prev, list.Mooc);
+            Assert.Null(list.Mooc.Next.Next);
+
         }
 
         [Fact]
-        public void AddFirstToList()
+        public void InsertFirstCountOne()
         {
-            List list = new List();
+            List list = GetInsertFirstCountOne();
 
-            Node newNode = new Node();
-            newNode.Data = 1;
 
-            list.InsertFirst(newNode);
-
-            Node newNode2 = new Node();
-            newNode2.Data = 2;
-
-            list.InsertFirst(newNode2);
-
-            // better than a happy node case from scratch, Maybe try Node happy = newNode2
-            newNode2.Next = newNode;
-            newNode2.Prev = list.Mooc;
-
-            Assert.Equal(newNode2, list.Mooc.Next);
-        }
-
-        [Fact]
-        public void AddFirstToListIndividual()
-        {
-            List list = new List();
-
-            Node newNode = new Node();
-            newNode.Data = 1;
-
-            list.InsertFirst(newNode);
-
-            Node newNode2 = new Node();
-            newNode2.Data = 2;
-
-            list.InsertFirst(newNode2);
 
             Node HeadHappyCase = new Node();
-            HeadHappyCase.Data = newNode2.Data;
-            HeadHappyCase.Next = newNode;
+            HeadHappyCase.Data = 1;
             HeadHappyCase.Prev = list.Mooc;
+            HeadHappyCase.Next = null;
+
+            // Mooc
+            Node HeadHappyCasePrev = new Node();
+            HeadHappyCasePrev.Data = 10;
+            HeadHappyCasePrev.Prev = null;
+            HeadHappyCasePrev.Next = HeadHappyCase;
+
+            HeadHappyCase.Next = HeadHappyCasePrev;
 
             Assert.Equal(HeadHappyCase.Data, list.Mooc.Next.Data);
             Assert.Equal(HeadHappyCase.Next, list.Mooc.Next.Next);
@@ -92,7 +73,7 @@ namespace HWDoublyLinkedList.Tests.Insert {
 
 
         [Fact]
-        public void AddFirstToListHeadNextPrev()
+        public void InsertFirstCountOneHappyCasePrev()
         {
             List list = new List();
 
@@ -106,6 +87,7 @@ namespace HWDoublyLinkedList.Tests.Insert {
 
             list.InsertFirst(newNode2);
 
+            newNode.Prev = list.Mooc.Next;
             Node HeadHappyCase = new Node();
             HeadHappyCase.Data = newNode2.Data;
             HeadHappyCase.Next = newNode;
@@ -114,11 +96,11 @@ namespace HWDoublyLinkedList.Tests.Insert {
             
             HeadHappyCase.Prev = indirect;
 
-            Assert.Equal(newNode.Prev, indirect.Next.Next.Prev);
+            Assert.Equal(HeadHappyCase.Prev, indirect.Next.Prev);
         }
 
         [Fact]
-        public void AddFirstToListHeadPrevNext()
+        public void InsertFirstCountOneHappyCaseNextPrev()
         {
             List list = new List();
 
@@ -131,6 +113,8 @@ namespace HWDoublyLinkedList.Tests.Insert {
             newNode2.Data = 2;
 
             list.InsertFirst(newNode2);
+            
+            newNode.Prev = list.Mooc.Next;
 
             Node HeadHappyCase = new Node();
             HeadHappyCase.Data = newNode2.Data;
@@ -139,10 +123,24 @@ namespace HWDoublyLinkedList.Tests.Insert {
             Node indirect = list.Mooc;
             
             HeadHappyCase.Prev = indirect;
-
-            Assert.Equal(newNode2.Prev.Next, list.Mooc.Next.Prev.Next);
+            System.Console.WriteLine("wow");
+            System.Console.WriteLine(HeadHappyCase.Next.Prev.Data);
+            System.Console.WriteLine(list.Mooc.Next.Next.Prev.Data);
+            Assert.Equal(HeadHappyCase.Next.Prev, list.Mooc.Next.Next.Prev);
         }
 
+        private List GetInsertFirstCountOne() {
+            List list = new List();
+            Node newNode = new Node();
+            newNode.Data = 2;
+            list.InsertFirst(newNode);
+
+            Node newNode2 = new Node();
+            newNode2.Data = 1;
+            list.InsertFirst(newNode2);
+
+            return list;
+        }
 
         [Fact]
         public void InserAftertFirst()
