@@ -37,22 +37,18 @@ namespace HWDoublyLinkedList.Tests.Insert {
         {
             List list = GetInsertFirstCountOne();
 
+            Node PreviousHead = list.Head;
+
+            Node newNode2 = new Node(1);
+            list.InsertFirst(newNode2);
+
             Node HeadHappyCase = new Node(1);
-            HeadHappyCase.Prev = list.Mooc;
-            HeadHappyCase.Next = null;
+            HeadHappyCase.Next = PreviousHead;
 
-            // Mooc
-            Node HeadHappyCasePrev = new Node(10);
-            HeadHappyCasePrev.Prev = null;
-            HeadHappyCasePrev.Next = HeadHappyCase;
-
-            HeadHappyCase.Next = HeadHappyCasePrev;
-
-            Assert.Equal(HeadHappyCase.Data, list.Mooc.Next.Data);
-            Assert.Equal(HeadHappyCase.Next, list.Mooc.Next.Next);
-            Assert.Equal(HeadHappyCase.Prev, list.Mooc.Next.Prev);
+            Assert.Equal(HeadHappyCase.Data, list.Head.Data);
+            Assert.Equal(HeadHappyCase.Next, list.Head.Next);
+            Assert.Equal(HeadHappyCase.Prev, list.Head.Prev);
         }
-
 
         [Fact]
         public void InsertFirstCountOneHappyCasePrev()
@@ -115,9 +111,6 @@ namespace HWDoublyLinkedList.Tests.Insert {
             List list = new List();
             Node newNode = new Node(2);
             list.InsertFirst(newNode);
-
-            Node newNode2 = new Node(1);
-            list.InsertFirst(newNode2);
 
             return list;
         }
