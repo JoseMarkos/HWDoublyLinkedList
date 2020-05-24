@@ -48,5 +48,7 @@ namespace HWDoublyLinkedList.Tests.Enumerable {
 
             Assert.Equal(3, enumerator.Current.Data);
         }
+
+        // Dispose
     }
 }

@@ -48,8 +48,9 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application.Insert
             Node indirect = current;
             
             if (indirect.Next != null) 
-            {
+            {   
                 newNode.Next = indirect.Next;
+                indirect.Prev = newNode;
             }
 
             current.Next = newNode; 

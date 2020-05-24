@@ -11,161 +11,90 @@ namespace HWDoublyLinkedList.Tests.Insert {
         [Fact]
         public void CreateNode() 
         {
-            Node newNode = new Node();
+            Node newNode = new Node(20);
 
+           // Assert.IsAssignableFrom<Node>(newNode.Next);
             Assert.Null(newNode.Next);
             Assert.Null(newNode.Prev);
-            Assert.Equal(0, newNode.Data);
-        }
-
-        [Fact]
-        public void CreateNodeWithData() 
-        {
-            Node newNode = new Node();
-            newNode.Data = 20;
-
-            Assert.Null(newNode.Next);
-            Assert.Null(newNode.Prev);
+            Assert.IsType<int>(newNode.Data);
             Assert.Equal(20, newNode.Data);
-            Assert.False(null == newNode);
         }
 
         [Fact]
-        public void AddHeadToList()
+        public void InsertFirstToListWithNoChild()
         {
             List list = new List();
-            Node newNode = new Node();
-            newNode.Data = 3;
+
+            Node newNode = new Node(3);
 
             list.InsertFirst(newNode);
 
+            Assert.Equal(list.Head, newNode);
             Assert.Equal(list.Mooc.Next, newNode);
-            Assert.Equal(list.Mooc.Next.Prev, list.Mooc);
         }
 
         [Fact]
-        public void AddFirstToList()
+        public void InsertFirstToListWithOneChild()
         {
-            List list = new List();
+            List list = GetInsertFirstToListWithOneChild();
 
-            Node newNode = new Node();
-            newNode.Data = 1;
+            Node PreviousHead = list.Head;
 
-            list.InsertFirst(newNode);
-
-            Node newNode2 = new Node();
-            newNode2.Data = 2;
-
+            Node newNode2 = new Node(1);
             list.InsertFirst(newNode2);
 
-            // better than a happy node case from scratch, Maybe try Node happy = newNode2
-            newNode2.Next = newNode;
-            newNode2.Prev = list.Mooc;
+            Node HeadHappyCase = new Node(1);
+            HeadHappyCase.Next = PreviousHead;
 
-            Assert.Equal(newNode2, list.Mooc.Next);
+            Assert.Equal(HeadHappyCase.Data, list.Head.Data);
+            Assert.Equal(HeadHappyCase.Next, list.Head.Next);
+            Assert.Equal(HeadHappyCase.Prev, list.Head.Prev);
         }
 
         [Fact]
-        public void AddFirstToListIndividual()
+        public void InsertFirstToListWithOneChildtPrevOfLastChild()
         {
-            List list = new List();
+            List list = GetInsertFirstToListWithOneChild();
 
-            Node newNode = new Node();
-            newNode.Data = 1;
+            Node PreviousHead = list.Head;
+            Node newNode2 = new Node(2);
 
-            list.InsertFirst(newNode);
-
-            Node newNode2 = new Node();
-            newNode2.Data = 2;
+            Node HeadHappyCase = newNode2;
+            HeadHappyCase.Next = PreviousHead;
 
             list.InsertFirst(newNode2);
-
-            Node HeadHappyCase = new Node();
-            HeadHappyCase.Data = newNode2.Data;
-            HeadHappyCase.Next = newNode;
-            HeadHappyCase.Prev = list.Mooc;
-
-            Assert.Equal(HeadHappyCase.Data, list.Mooc.Next.Data);
-            Assert.Equal(HeadHappyCase.Next, list.Mooc.Next.Next);
-            Assert.Equal(HeadHappyCase.Prev, list.Mooc.Next.Prev);
-        }
-
-
-        [Fact]
-        public void AddFirstToListHeadNextPrev()
-        {
-            List list = new List();
-
-            Node newNode = new Node();
-            newNode.Data = 1;
-
-            list.InsertFirst(newNode);
-
-            Node newNode2 = new Node();
-            newNode2.Data = 2;
-
-            list.InsertFirst(newNode2);
-
-            Node HeadHappyCase = new Node();
-            HeadHappyCase.Data = newNode2.Data;
-            HeadHappyCase.Next = newNode;
-
-            Node indirect = list.Mooc;
             
-            HeadHappyCase.Prev = indirect;
+            Node TailHappyCase = new Node(newNode2.Data);
+            TailHappyCase.Prev = HeadHappyCase;
 
-            Assert.Equal(newNode.Prev, indirect.Next.Next.Prev);
+            Assert.Equal(TailHappyCase.Prev, list.Tail.Prev);
         }
 
-        [Fact]
-        public void AddFirstToListHeadPrevNext()
-        {
+        private List GetInsertFirstToListWithOneChild() {
             List list = new List();
-
-            Node newNode = new Node();
-            newNode.Data = 1;
-
+            Node newNode = new Node(2);
             list.InsertFirst(newNode);
 
-            Node newNode2 = new Node();
-            newNode2.Data = 2;
-
-            list.InsertFirst(newNode2);
-
-            Node HeadHappyCase = new Node();
-            HeadHappyCase.Data = newNode2.Data;
-            HeadHappyCase.Next = newNode;
-
-            Node indirect = list.Mooc;
-            
-            HeadHappyCase.Prev = indirect;
-
-            Assert.Equal(newNode2.Prev.Next, list.Mooc.Next.Prev.Next);
+            return list;
         }
-
 
         [Fact]
         public void InserAftertFirst()
         {
-            List list = new List();
-            Node newNode = new Node();
-            newNode.Data = 3;
+            List list = GetInsertFirstToListWithOneChild();
+            Node HeadHappyCase = list.Head;
 
-            list.InsertFirst(newNode);
-
-            Node newNode2 = new Node();
-            newNode2.Data = 5;
+            Node newNode2 = new Node(3);
 
             list.InserAftertFirst(newNode2);
 
-            newNode.Next = newNode2;
-            newNode.Prev = list.Mooc;
+            Node HappyCase = newNode2;
+            HappyCase.Prev = HeadHappyCase;
 
-            newNode2.Prev = newNode;
-            newNode2.Next = null;
+            HeadHappyCase.Next = HappyCase;
 
-            Assert.Equal(newNode, list.Mooc.Next);
-            Assert.Equal(newNode2, list.Mooc.Next.Next);
+            Assert.Equal(HappyCase, list.Head.Next);
+            Assert.Equal(HeadHappyCase, list.Head.Next.Prev);
         }
 
         [Fact]
