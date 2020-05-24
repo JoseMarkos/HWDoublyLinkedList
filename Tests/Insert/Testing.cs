@@ -29,6 +29,7 @@ namespace HWDoublyLinkedList.Tests.Insert {
 
             list.InsertFirst(newNode);
 
+            Assert.Equal(list.Head, newNode);
             Assert.Equal(list.Mooc.Next, newNode);
         }
 
@@ -63,10 +64,10 @@ namespace HWDoublyLinkedList.Tests.Insert {
 
             list.InsertFirst(newNode2);
             
-            Node HappyCase = new Node(newNode2.Data);
-            HappyCase.Prev = HeadHappyCase;
+            Node TailHappyCase = new Node(newNode2.Data);
+            TailHappyCase.Prev = HeadHappyCase;
 
-            Assert.Equal(HappyCase.Prev, list.Tail.Prev);
+            Assert.Equal(TailHappyCase.Prev, list.Tail.Prev);
         }
 
         private List GetInsertFirstToListWithOneChild() {
@@ -80,25 +81,20 @@ namespace HWDoublyLinkedList.Tests.Insert {
         [Fact]
         public void InserAftertFirst()
         {
-            List list = new List();
-            Node newNode = new Node();
-            newNode.Data = 3;
+            List list = GetInsertFirstToListWithOneChild();
+            Node HeadHappyCase = list.Head;
 
-            list.InsertFirst(newNode);
-
-            Node newNode2 = new Node();
-            newNode2.Data = 5;
+            Node newNode2 = new Node(3);
 
             list.InserAftertFirst(newNode2);
 
-            newNode.Next = newNode2;
-            newNode.Prev = list.Mooc;
+            Node HappyCase = newNode2;
+            HappyCase.Prev = HeadHappyCase;
 
-            newNode2.Prev = newNode;
-            newNode2.Next = null;
+            HeadHappyCase.Next = HappyCase;
 
-            Assert.Equal(newNode, list.Mooc.Next);
-            Assert.Equal(newNode2, list.Mooc.Next.Next);
+            Assert.Equal(HappyCase, list.Head.Next);
+            Assert.Equal(HeadHappyCase, list.Head.Next.Prev);
         }
 
         [Fact]
