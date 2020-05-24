@@ -11,23 +11,13 @@ namespace HWDoublyLinkedList.Tests.Insert {
         [Fact]
         public void CreateNode() 
         {
-            Node newNode = new Node();
+            Node newNode = new Node(20);
 
+           // Assert.IsAssignableFrom<Node>(newNode.Next);
             Assert.Null(newNode.Next);
             Assert.Null(newNode.Prev);
-            Assert.Equal(0, newNode.Data);
-        }
-
-        [Fact]
-        public void CreateNodeWithData() 
-        {
-            Node newNode = new Node();
-            newNode.Data = 20;
-
-            Assert.Null(newNode.Next);
-            Assert.Null(newNode.Prev);
+            Assert.IsType<int>(newNode.Data);
             Assert.Equal(20, newNode.Data);
-            Assert.False(null == newNode);
         }
 
         [Fact]
@@ -35,15 +25,11 @@ namespace HWDoublyLinkedList.Tests.Insert {
         {
             List list = new List();
 
-            Node newNode = new Node();
-            newNode.Data = 3;
+            Node newNode = new Node(3);
 
             list.InsertFirst(newNode);
 
-            Assert.Equal(list.Mooc.Next.Data, newNode.Data);
-            Assert.Equal(list.Mooc.Next.Prev, list.Mooc);
-            Assert.Null(list.Mooc.Next.Next);
-
+            Assert.Equal(list.Mooc.Next, newNode);
         }
 
         [Fact]
@@ -51,16 +37,12 @@ namespace HWDoublyLinkedList.Tests.Insert {
         {
             List list = GetInsertFirstCountOne();
 
-
-
-            Node HeadHappyCase = new Node();
-            HeadHappyCase.Data = 1;
+            Node HeadHappyCase = new Node(1);
             HeadHappyCase.Prev = list.Mooc;
             HeadHappyCase.Next = null;
 
             // Mooc
-            Node HeadHappyCasePrev = new Node();
-            HeadHappyCasePrev.Data = 10;
+            Node HeadHappyCasePrev = new Node(10);
             HeadHappyCasePrev.Prev = null;
             HeadHappyCasePrev.Next = HeadHappyCase;
 
@@ -131,12 +113,10 @@ namespace HWDoublyLinkedList.Tests.Insert {
 
         private List GetInsertFirstCountOne() {
             List list = new List();
-            Node newNode = new Node();
-            newNode.Data = 2;
+            Node newNode = new Node(2);
             list.InsertFirst(newNode);
 
-            Node newNode2 = new Node();
-            newNode2.Data = 1;
+            Node newNode2 = new Node(1);
             list.InsertFirst(newNode2);
 
             return list;
