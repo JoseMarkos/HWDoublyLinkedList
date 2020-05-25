@@ -90,29 +90,29 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             Count++;
         }
 
-        public void InsertBeforeLast(Node newNode) {
+        public void InsertBeforeLast(Node newNode) 
+        {
+            if (Head is null) {
+                throw new IndexOutOfRangeException("The list has no elements");
+            }
+
+            if (Tail.Equals(Head))
+            {
+                newNode.Next = Tail;
+                newNode.Next.Prev = newNode;
+                
+                Head = newNode;
+                System.Console.WriteLine("hola");
+                System.Console.WriteLine(Tail.Data);
+
+                return;
+            }
+
+            newNode.Next = Tail;
+            newNode.Prev = Tail.Prev;
+            Tail.Prev = newNode;
+
             Count++;
-        }
-
-        public void DeleteAfterFirst()
-        {
-            Count--;
-        }
-
-        public void DeleteBiggest()
-        {
-            Count--;
-            throw new NotImplementedException();
-        }
-
-        public void DeleteFirst()
-        {
-            Count--;
-        }
-
-        public void DeleteLast()
-        {
-            Count--;
         }
     }
 }

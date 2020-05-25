@@ -223,30 +223,56 @@ namespace HWDoublyLinkedList.Tests.Insert {
             
             Assert.Equal<Node>(HappyCase, list.Tail);
         }
-    
-        // [Fact]
-        // public void InsertBeforeLast() {
-        //     List list = AddFirstAddAfterFirstAddAfterFirst();
-        //     Node newNode = new Node(7);
-        //     newNode.Data = 7;
 
-        //     list.InsertBeforeLast(newNode);
+        [Fact] 
+        public void InsertBeforeLastEmptyListCase() 
+        {
+            List list = new List();
 
-        //     ListEnumerable enumerable = new ListEnumerable(list);
-        //     IEnumerator<Node> enumerator = enumerable.GetEnumerator();
+            Assert.Throws<IndexOutOfRangeException>(
+                ()=> list.InsertBeforeLast(new Node(3))
+            );
+        } 
 
+        [Fact]
+        public void InsertBeforeLastOneChildCase() 
+        { 
+            List list = new List();
+            Node newNode = new Node(8);
 
-        //     while(enumerator.MoveNext()) 
-        //     {
-        //     }
-            
-        //     Node last = enumerator.Current;  
-            
-        //     Assert.Equal(3, last.Data);
-        //     Assert.Equal(7, last.Prev.Data);
-        //     Assert.Equal(2, last.Prev.Prev.Data);
-        //     Assert.Equal(3, last.Prev.Next.Data);
-        //     Assert.Null(last.Next);
-        // }
+            list.InsertFirst(newNode);
+
+            Node newNode2 = new Node(9);
+
+            list.InsertBeforeLast(newNode2);
+
+            Node TailHappyCase = newNode;
+
+            Node HappyCase = newNode2;
+            HappyCase.Next = TailHappyCase;
+            HappyCase.Next.Prev = HappyCase;
+
+            Assert.Equal(HappyCase, list.Head);
+            Assert.Equal(TailHappyCase, list.Tail);
+        }
+
+        [Fact]
+        public void InsertBeforeLastNoEmptyListCase() {
+            List list = AddFirstAddAfterFirstAddAfterFirst();
+            List list2 = AddFirstAddAfterFirstAddAfterFirst();
+            Node TailHappyCase = list.Tail;
+
+            Node newNode = new Node(71);
+
+            list2.InsertBeforeLast(newNode);
+
+            Node HappyCase = newNode;
+
+            HappyCase.Next = TailHappyCase;
+            HappyCase.Prev = TailHappyCase.Prev;
+            HappyCase.Next.Prev = HappyCase;
+
+            Assert.Equal(HappyCase, list2.Tail.Prev);
+        }
     }
 }
