@@ -33,9 +33,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
         public Node Current {
             get
             {
-                unsafe {
-                    return _current;
-                }
+                return _current;
             }
         }
 
@@ -50,13 +48,10 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
 
         public bool MoveNext()
         {
-            unsafe 
+            if (_current.Next != null)
             {
-                if (_current.Next != null)
-                {
-                   _current = _current.Next;
-                    return true;
-                }
+                _current = _current.Next;
+                return true;
             }
                 
             return false;
