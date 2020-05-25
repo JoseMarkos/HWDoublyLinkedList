@@ -37,13 +37,12 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application.Delete
         public void DeleteLast(ref Node ghost)
         {
             ListEnumerator enumerator = new ListEnumerator(ghost);
-            Node last = new Node();
 
             while(enumerator.MoveNext()) 
             {
             }
             
-            last = enumerator.Current;
+            Node last = enumerator.Current;
 
             enumerator.Current.Prev.Next = null;
         }
