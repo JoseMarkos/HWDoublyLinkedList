@@ -78,6 +78,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             {
                 Head = newNode;
                 Tail = newNode;
+                Count++;
 
                 return;
             }
@@ -86,7 +87,6 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             newNode.Prev.Next = newNode;        
             
             Tail = newNode;
-
             Count++;
         }
 
@@ -102,8 +102,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
                 newNode.Next.Prev = newNode;
                 
                 Head = newNode;
-                System.Console.WriteLine("hola");
-                System.Console.WriteLine(Tail.Data);
+                Count++;
 
                 return;
             }
@@ -111,7 +110,6 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             newNode.Next = Tail;
             newNode.Prev = Tail.Prev;
             Tail.Prev = newNode;
-
             Count++;
         }
     }

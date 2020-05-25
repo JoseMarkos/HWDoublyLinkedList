@@ -10,17 +10,14 @@ namespace HWDoublyLinkedList.Tests.Enumerable {
 
         private List AddFirstAddAfterFirstAddAfterFirst() {
             List list = new List();
-            Node newNode = new Node();
-            newNode.Data = 1;
+            Node newNode = new Node(1);
             list.InsertFirst(newNode);
 
-            Node newNode2 = new Node();
-            newNode2.Data = 3;
-            list.InserAftertFirst(newNode2);
+            Node newNode2 = new Node(3);
+            list.InsertAfterFirst(newNode2);
 
-            Node newNode3 = new Node();
-            newNode3.Data = 2;
-            list.InserAftertFirst(newNode3);
+            Node newNode3 = new Node(2);
+            list.InsertAfterFirst(newNode3);
 
             return list;
         }
@@ -41,11 +38,11 @@ namespace HWDoublyLinkedList.Tests.Enumerable {
             ListEnumerable enumerable = new ListEnumerable(list);
             IEnumerator<Node> enumerator = enumerable.GetEnumerator();
 
-            enumerator.MoveNext();
-            enumerator.MoveNext();
-            enumerator.MoveNext();
-            enumerator.MoveNext();
-
+            while(enumerator.MoveNext())
+            {
+                
+            }
+            
             Assert.Equal(3, enumerator.Current.Data);
         }
 

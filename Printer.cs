@@ -15,12 +15,9 @@ namespace HWDoublyLinkedList
 
             for (int i = enumerable.List.Count; i > 0; i--)
             {
-                System.Console.WriteLine("\n i " + i);
                 enumerator.MoveNext();
-                System.Console.WriteLine(enumerator.Current.Data + " eee current");
+                System.Console.WriteLine(enumerator.Current.Data + " current");
             }
-                
-            System.Console.WriteLine(enumerable.List.Count + " List count \n");
         }
     }
 }
