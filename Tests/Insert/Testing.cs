@@ -274,5 +274,27 @@ namespace HWDoublyLinkedList.Tests.Insert {
 
             Assert.Equal(HappyCase, list2.Tail.Prev);
         }
+
+        // [Fact]
+        // public void Test0()
+        // {
+        //     Node node1 = new Node(1);
+        //     Node node2 = new Node(1);
+
+        //     Assert.Equal(node1, node2);
+        // }
+
+
+        // [Fact]
+        // public void Test01()
+        // {
+        //     Node node1 = new Node(1);
+        //     Node node2 = new Node(1);
+        //     Node node3 = node1;
+
+        //     node3.Data = 33;
+
+        //     Assert.Equal(node1, node2);
+        // }
     }
 }
