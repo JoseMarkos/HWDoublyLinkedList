@@ -104,7 +104,6 @@ namespace HWDoublyLinkedList.Tests.Delete {
             );
         }
 
-
         [Fact]
         public void DeleteAfterFirstTwoChilds()
         {
@@ -114,10 +113,11 @@ namespace HWDoublyLinkedList.Tests.Delete {
             list.DeleteAfterFirst();
 
             Assert.Null(list.Mooc.Next.Next);
+            Assert.Equal(list.Mooc.Next, list.Tail);
         }
 
         [Fact]
-        public void DeleteAfterFirstListNotEmpty() 
+        public void DeleteAfterFirstListNotEmpty()
         {
             List list = AddFirstAddAfterFirstAddAfterFirst();
             int HappyCase = list.Head.Next.Next.Data;

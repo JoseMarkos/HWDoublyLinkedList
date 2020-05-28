@@ -155,6 +155,8 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             {
                 Head.Prev = null;
             }
+
+            Count--;
         }
 
         public void DeleteLast()
@@ -164,6 +166,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
                 throw new IndexOutOfRangeException("The list has no elements");
             }
 
+            Count--;
             Tail = Tail.Prev;
 
             if (Tail is null)
@@ -189,12 +192,15 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
                 throw new IndexOutOfRangeException("The element is out of range");
             }
 
+            Count--;
+            // two childs case
             if (Head.Next.Next is null) 
             {
-                Head.Next = null; 
+                Head.Next = null;
+                Tail = Head;
                 return;
             }
-
+            // three+ childs clase
             Node indirect = new Node(Head.Next.Next.Data);
             indirect.Prev = Head;
             indirect.Next = Head.Next.Next.Next;
@@ -203,7 +209,20 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 
         public void DeleteBiggest()
         {
-            throw new NotImplementedException();
+            if (Head is null)
+            {
+                throw new IndexOutOfRangeException("The list has no elements");
+            }
+
+            IEnumerator<Node> enumerator = GetEnumerator();
+            enumerator.MoveNext();
+            int biggest = enumerator.Current.Data;
+            int GetMax(int x, int current) => x > current? x : current;
+
+            while(enumerator.MoveNext())
+            {
+                biggest = GetMax(biggest, enumerator.Current.Data);
+            }
         }
     }
 }
