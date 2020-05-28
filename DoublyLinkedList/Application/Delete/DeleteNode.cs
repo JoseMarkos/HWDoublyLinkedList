@@ -23,15 +23,24 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application.Delete
             ghost.Next.Next = indirect; 
         }
 
+        public void DeleteAfterFirst()
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeleteBiggest(ref Node ghost)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteFirst(ref Node ghost)
+        public void DeleteBiggest()
         {
-            ghost.Next.Next.Prev = ghost;
-            ghost.Next = ghost.Next.Next;
+            throw new NotImplementedException();
+        }
+
+        public void DeleteFirst()
+        {
+            throw new NotImplementedException();
         }
 
         public void DeleteLast(ref Node ghost)
@@ -45,6 +54,11 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application.Delete
             Node last = enumerator.Current;
 
             enumerator.Current.Prev.Next = null;
+        }
+
+        public void DeleteLast()
+        {
+            throw new NotImplementedException();
         }
     }
 }

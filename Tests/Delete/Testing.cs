@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using HWDoublyLinkedList.DoublyLinkedList.Application;
 using HWDoublyLinkedList.DoublyLinkedList.Domain;
 using HWDoublyLinkedList.DoublyLinkedNode.Domain;
 using Microsoft.VisualStudio.TestPlatform;
@@ -8,30 +7,27 @@ using Xunit;
 
 namespace HWDoublyLinkedList.Tests.Delete {
     public class Testing {
-        // private List AddFirstAddAfterFirstAddAfterFirst() {
-        //     Node newNode = new Node(1);
+        private List AddFirstAddAfterFirstAddAfterFirst() {
+            List list = new List();
+            Node newNode = new Node(1);
+            list.InsertFirst(newNode);
+            Node newNode2 = new Node(3);
+            list.InsertAfterFirst(newNode2);
+            Node newNode3 = new Node(2);
+            list.InsertAfterFirst(newNode3);
 
-        //     List list = new List();
-        //     list.InsertFirst(newNode);
+            return list;
+        }
 
-        //     Node newNode2 = new Node(3);
-        //     list.InserAftertFirst(newNode2);
+        [Fact]
+        public void DeleteFirstListNotEmpty() 
+        {
+            List list = AddFirstAddAfterFirstAddAfterFirst();
+            int HappyCase = list.Head.Next.Data;
+            list.DeleteFirst();
 
-        //     Node newNode3 = new Node(2);
-        //     list.InserAftertFirst(newNode3);
-
-        //     return list;
-        // }
-
-        // [Fact]
-        // public void DeleteFirst() {
-        //     List list = AddFirstAddAfterFirstAddAfterFirst();
-
-        //     Node nodeAfterFirst = list.Mooc.Next.Next;
-        //     list.DeleteFirst();
-
-        //     Assert.Equal(nodeAfterFirst, list.Mooc.Next);
-        // }
+            Assert.Equal(HappyCase, list.Mooc.Next.Data);
+        }
 
         // [Fact]
         // public void DeleteLast() {

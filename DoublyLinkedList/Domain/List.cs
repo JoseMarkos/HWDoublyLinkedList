@@ -8,7 +8,7 @@ using HWDoublyLinkedList.DoublyLinkedList.Application.Delete;
 
 namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 {
-    public sealed class List : InsertRequirements, IEnumerable<Node>
+    public sealed class List : InsertRequirements, DeleteRequirements, IEnumerable<Node>
     {
         public  Node Mooc;
         //private  Node Mooc;  
@@ -135,6 +135,38 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
         {
             ListReverseEnumerator = new ListReverseEnumerator(GetEnumerator());
             return ListReverseEnumerator;
+        }
+
+        public void DeleteFirst()
+        {
+            if (Head.Equals(null))
+            {
+                throw new IndexOutOfRangeException("The list has no elements");
+            }
+
+            Head = Head.Next;
+            Head.Prev = null;
+            Mooc.Next = Head;
+
+            if (Head.Equals(null))
+            {
+                Tail = null;
+            }
+        }
+
+        public void DeleteLast()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteAfterFirst()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteBiggest()
+        {
+            throw new NotImplementedException();
         }
     }
 }
