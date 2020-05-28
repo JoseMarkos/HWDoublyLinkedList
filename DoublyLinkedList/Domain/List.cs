@@ -8,12 +8,14 @@ using HWDoublyLinkedList.DoublyLinkedList.Application.Delete;
 
 namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 {
-    public sealed class List : InsertRequirements
+    public sealed class List : InsertRequirements, IEnumerable<Node>
     {
-        public unsafe Node Mooc;
-        public unsafe Node Head;
-        public Node Tail;
+        public  Node Mooc;
+        //private  Node Mooc;  
+        public  Node Head {get; private set;}
+        public Node Tail {get; private set;}
         public int Count {get; private set;}
+        private ListEnumerator ListEnumerator;
 
         public List () 
         {
@@ -21,6 +23,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             Mooc = new Node(0);
             Head = null;
             Tail = null;
+            ListEnumerator = new ListEnumerator(Mooc);
         }
 
         public void InsertFirst(Node newNode)
@@ -78,6 +81,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             {
                 Head = newNode;
                 Tail = newNode;
+                Mooc.Next = Head;
                 Count++;
 
                 return;
@@ -102,6 +106,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
                 newNode.Next.Prev = newNode;
                 
                 Head = newNode;
+                Mooc.Next = Head;
                 Count++;
 
                 return;
@@ -109,8 +114,20 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 
             newNode.Next = Tail;
             newNode.Prev = Tail.Prev;
+            newNode.Prev.Next = newNode;
             Tail.Prev = newNode;
+
             Count++;
+        }
+
+        public IEnumerator<Node> GetEnumerator()
+        {
+            return ListEnumerator;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
