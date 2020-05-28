@@ -9,11 +9,9 @@ namespace HWDoublyLinkedList
     sealed class Printer {
         public static void Print(List list)
         {
-            ListEnumerable enumerable = new ListEnumerable(list);
+            IEnumerator<Node> enumerator = list.GetEnumerator();
 
-            IEnumerator<Node> enumerator = enumerable.GetEnumerator();
-
-            for (int i = enumerable.List.Count; i > 0; i--)
+            for (int i = list.Count; i > 0; i--)
             {
                 enumerator.MoveNext();
                 System.Console.WriteLine(enumerator.Current.Data + " current");
