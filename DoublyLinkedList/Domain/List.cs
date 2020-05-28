@@ -179,7 +179,26 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 
         public void DeleteAfterFirst()
         {
-            throw new NotImplementedException();
+            if (Head is null)
+            {
+                throw new IndexOutOfRangeException("The list has no elements");
+            }
+
+            if (Head.Next is null)
+            {
+                throw new IndexOutOfRangeException("The element is out of range");
+            }
+
+            if (Head.Next.Next is null) 
+            {
+                Head.Next = null; 
+                return;
+            }
+
+            Node indirect = new Node(Head.Next.Next.Data);
+            indirect.Prev = Head;
+            indirect.Next = Head.Next.Next.Next;
+            Head.Next = indirect;
         }
 
         public void DeleteBiggest()

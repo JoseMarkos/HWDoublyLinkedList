@@ -83,15 +83,48 @@ namespace HWDoublyLinkedList.Tests.Delete {
             Assert.Null(list.Tail.Next);
         }
 
-        // [Fact]
-        // public void DeleteAfterFirst() {
-        //     List list = AddFirstAddAfterFirstAddAfterFirst();
+        [Fact]
+        public void DeleteAfterFirstListEmpty() 
+        {
+            List list = new List();
+            
+            Assert.Throws<IndexOutOfRangeException>(
+                () => list.DeleteAfterFirst()
+            );
+        }
 
-        //     Node nodeAfterFirstNext = list.Mooc.Next.Next.Next;
-        //     list.DeleteAfterFirst();
+        [Fact]
+        public void DeleteAfterFirstOneChild()
+        {
+            List list = new List();
+            list.InsertFirst(new Node(1));
 
-        //     Assert.Equal(nodeAfterFirstNext, list.Mooc.Next.Next);
-        // }
+            Assert.Throws<IndexOutOfRangeException>(
+                () => list.DeleteAfterFirst()
+            );
+        }
+
+
+        [Fact]
+        public void DeleteAfterFirstTwoChilds()
+        {
+            List list = new List();
+            list.InsertFirst(new Node(2));
+            list.InsertFirst(new Node(1));
+            list.DeleteAfterFirst();
+
+            Assert.Null(list.Mooc.Next.Next);
+        }
+
+        [Fact]
+        public void DeleteAfterFirstListNotEmpty() 
+        {
+            List list = AddFirstAddAfterFirstAddAfterFirst();
+            int HappyCase = list.Head.Next.Next.Data;
+            list.DeleteAfterFirst();
+
+            Assert.Equal(HappyCase, list.Mooc.Next.Next.Data);
+        }
 
         // [Fact]
         // public void DeleteAfterFirstCountOne() {
