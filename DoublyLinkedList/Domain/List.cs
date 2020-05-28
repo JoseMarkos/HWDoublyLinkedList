@@ -16,6 +16,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
         public Node Tail {get; private set;}
         public int Count {get; private set;}
         private ListEnumerator ListEnumerator;
+        private ListReverseEnumerator ListReverseEnumerator;
 
         public List () 
         {
@@ -128,6 +129,12 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+         public IEnumerator<Node> GetReverseEnumerator()
+        {
+            ListReverseEnumerator = new ListReverseEnumerator(GetEnumerator());
+            return ListReverseEnumerator;
         }
     }
 }

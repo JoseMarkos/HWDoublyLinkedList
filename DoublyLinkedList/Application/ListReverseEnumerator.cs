@@ -6,14 +6,21 @@ using HWDoublyLinkedList.DoublyLinkedNode.Domain;
 
 namespace HWDoublyLinkedList.DoublyLinkedList.Application
 {
-    public sealed class ListEnumerator : IEnumerator<Node>
+    public sealed class ListReverseEnumerator : IEnumerator<Node>
     {
         private Node _current;
         private Node nodeReseted;
 
-        public ListEnumerator(Node node) {
-            _current = node;
-            nodeReseted = node;
+        public ListReverseEnumerator(IEnumerator<Node> enumerartor) 
+        {
+            while(enumerartor.MoveNext())
+            {
+            }
+
+            Node Ghost = new Node(0);
+            Ghost.Prev = enumerartor.Current;
+            _current = Ghost;
+            nodeReseted = Ghost;
         }
 
         public Node Current {
@@ -34,9 +41,9 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Application
 
         public bool MoveNext()
         {
-            if (_current.Next != null)
+            if (_current.Prev != null)
             {
-                _current = _current.Next;
+                _current = _current.Prev;
                 return true;
             }
                 

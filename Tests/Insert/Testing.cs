@@ -261,7 +261,6 @@ namespace HWDoublyLinkedList.Tests.Insert {
             for (int i = 1; i < list2.Count; i++)
             {
                 enumerator.MoveNext();
-                System.Console.WriteLine(enumerator.Current);
             }
 
             Node HappyCaseEnumeable = enumerator.Current;

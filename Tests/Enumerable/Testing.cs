@@ -32,7 +32,8 @@ namespace HWDoublyLinkedList.Tests.Enumerable {
         }
 
         [Fact]
-        public void MoveNext() {
+        public void MoveNext() 
+        {
             List list = AddFirstAddAfterFirstAddAfterFirst();
             IEnumerator<Node> enumerator = list.GetEnumerator();
             enumerator.MoveNext();
@@ -42,6 +43,20 @@ namespace HWDoublyLinkedList.Tests.Enumerable {
             enumerator.MoveNext();
             Assert.Equal(3, enumerator.Current.Data);
         }
+
+        [Fact]
+        public void ReverseMoveNext() 
+        {
+            List list = AddFirstAddAfterFirstAddAfterFirst();
+            IEnumerator<Node> reverseEnumerator = list.GetReverseEnumerator();
+            reverseEnumerator.MoveNext();
+            Assert.Equal(3, reverseEnumerator.Current.Data);
+            reverseEnumerator.MoveNext();
+            Assert.Equal(2, reverseEnumerator.Current.Data);
+            reverseEnumerator.MoveNext();
+            Assert.Equal(1, reverseEnumerator.Current.Data);
+        }
+        
         // Dispose
     }
 }
