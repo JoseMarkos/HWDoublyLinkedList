@@ -159,7 +159,22 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 
         public void DeleteLast()
         {
-            throw new NotImplementedException();
+            if (Head is null)
+            {
+                throw new IndexOutOfRangeException("The list has no elements");
+            }
+
+            Tail = Tail.Prev;
+
+            if (Tail is null)
+            {
+                Head = null;
+                Mooc.Next = Head;
+            }
+            else 
+            {
+                Tail.Next = null;
+            }
         }
 
         public void DeleteAfterFirst()

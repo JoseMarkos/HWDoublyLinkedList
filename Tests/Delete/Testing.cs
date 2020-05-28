@@ -38,6 +38,7 @@ namespace HWDoublyLinkedList.Tests.Delete {
             list.DeleteFirst();
 
             Assert.Null(list.Mooc.Next);
+            Assert.Null(list.Tail);
         }
 
         [Fact]
@@ -50,35 +51,37 @@ namespace HWDoublyLinkedList.Tests.Delete {
             Assert.Equal(HappyCase, list.Mooc.Next.Data);
         }
 
-        // [Fact]
-        // public void DeleteLast() {
-        //     List list = AddFirstAddAfterFirstAddAfterFirst();
-
-        //     Node nodeAfterFirst = list.Mooc.Next.Next;
-
-        //     ListEnumerable enumerable = new ListEnumerable(list);
-        //     IEnumerator<Node> enumerator = enumerable.GetEnumerator();
-
-
-        //     while(enumerator.MoveNext())
-        //     {
-        //     }
-
-        //     Node last = enumerator.Current.Prev;
+        [Fact]
+        public void DeleteLastEmptyList() 
+        {
+            List list = new List();
             
-        //     list.DeleteLast();
+            Assert.Throws<IndexOutOfRangeException>(
+                () => list.DeleteLast()
+            );
+        }
 
-        //     enumerator.Dispose();
+        [Fact]
+        public void DeleteLastOneChild() 
+        {
+            List list = new List();
+            list.InsertFirst(new Node(1));
+            list.DeleteLast();
 
-        //     // ListEnumerable enumerable2 = new ListEnumerable(list);
-        //     // IEnumerator<Node> enumerator2 = enumerable2.GetEnumerator();
+            Assert.Null(list.Mooc.Next);
+            Assert.Null(list.Tail);
+        }
+
+        [Fact]
+        public void DeleteLastListNotEmpty() 
+        {
+            List list = AddFirstAddAfterFirstAddAfterFirst();
+            int HappyCase = list.Tail.Prev.Data;
+            list.DeleteLast();
             
-        //     while(enumerator.MoveNext())
-        //     {
-        //     }
-
-        //     Assert.Equal(last, enumerator.Current);
-        // }
+            Assert.Equal(HappyCase, list.Tail.Data);
+            Assert.Null(list.Tail.Next);
+        }
 
         // [Fact]
         // public void DeleteAfterFirst() {
