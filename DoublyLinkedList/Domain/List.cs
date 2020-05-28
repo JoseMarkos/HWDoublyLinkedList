@@ -139,18 +139,21 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 
         public void DeleteFirst()
         {
-            if (Head.Equals(null))
+            if (Head is null)
             {
                 throw new IndexOutOfRangeException("The list has no elements");
             }
-
+    
             Head = Head.Next;
-            Head.Prev = null;
             Mooc.Next = Head;
-
-            if (Head.Equals(null))
+            
+            if (Head is null)
             {
                 Tail = null;
+            }
+            else
+            {
+                Head.Prev = null;
             }
         }
 
