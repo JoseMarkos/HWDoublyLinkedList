@@ -59,7 +59,7 @@ namespace HWDoublyLinkedList.Tests.Insert {
             List list = GetInsertFirstToListWithOneChild();
 
             Node PreviousHead = list.Head;
-            Node newNode2 = new Node(2);
+            Node newNode2 = new Node(20);
 
             Node HeadHappyCase = newNode2;
             HeadHappyCase.Next = PreviousHead;
@@ -106,7 +106,7 @@ namespace HWDoublyLinkedList.Tests.Insert {
             
             Node newNode = new Node(1);
 
-            Assert.Throws<IndexOutOfRangeException>(()=>
+            Assert.Throws<ArgumentOutOfRangeException>(()=>
                 list.InsertAfterFirst(newNode)
                 );
         }
@@ -172,13 +172,10 @@ namespace HWDoublyLinkedList.Tests.Insert {
         private List AddFirstAddAfterFirstAddAfterFirst() {
             List list       = new List();
             Node newNode    = new Node(1);
-            newNode.Data    = 1;
             list.InsertFirst(newNode);
             Node newNode2   = new Node(3);
-            newNode2.Data   = 3;
             list.InsertAfterFirst(newNode2);
             Node newNode3   = new Node(2);
-            newNode3.Data   = 2;
             list.InsertAfterFirst(newNode3);
 
             return list;
@@ -227,7 +224,7 @@ namespace HWDoublyLinkedList.Tests.Insert {
         {
             List list = new List();
 
-            Assert.Throws<IndexOutOfRangeException>(
+            Assert.Throws<ArgumentOutOfRangeException>(
                 ()=> list.InsertBeforeLast(new Node(3))
             );
         } 
@@ -255,7 +252,6 @@ namespace HWDoublyLinkedList.Tests.Insert {
             Node HappyCase = new Node(71);
             HappyCase.Next = new Node(3);
             HappyCase.Prev = new Node(2);
-  
             IEnumerator<Node> enumerator = list2.GetEnumerator();
 
             for (int i = 1; i < list2.Count; i++)

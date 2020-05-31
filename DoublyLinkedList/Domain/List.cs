@@ -8,15 +8,20 @@ using HWDoublyLinkedList.DoublyLinkedList.Application.Delete;
 
 namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 {
-    public sealed class List : InsertRequirements, DeleteRequirements, IEnumerable<Node>
+    public sealed class List : InsertRequirements, DeleteRequirements, IEnumerable<Node>, ICollection<Node>
     {
-        public  Node Mooc;
-        //private  Node Mooc;  
+        public  Node Mooc {get; private set;}
         public  Node Head {get; private set;}
         public Node Tail {get; private set;}
         public int Count {get; private set;}
-        private ListEnumerator ListEnumerator;
-        private ListReverseEnumerator ListReverseEnumerator;
+        private ListEnumerator ListEnumerator = null;
+        private ListReverseEnumerator ListReverseEnumerator = null;
+
+        public bool IsSynchronized => false;
+
+        public object SyncRoot => null;
+
+        public bool IsReadOnly => throw new NotImplementedException();
 
         public List () 
         {
@@ -29,6 +34,11 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 
         public void InsertFirst(Node newNode)
         {
+            if (Contains(newNode))
+            {
+                throw new InvalidOperationException("The item already exsits");
+            }
+
             if (Head != null) 
             {   
                 newNode.Next = Head;
@@ -49,7 +59,12 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
         public void InsertAfterFirst(Node newNode)
         {
             if (Head is null) {
-                throw new IndexOutOfRangeException("The list has no elements");
+                throw new ArgumentOutOfRangeException("The list has no elements");
+            }
+
+            if (Contains(newNode))
+            {
+                throw new InvalidOperationException("The item already exsits");
             }
 
             bool SetTailFlag = false;
@@ -78,6 +93,11 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 
         public void InsertLast(Node newNode) 
         {
+            if (Contains(newNode))
+            {
+                throw new InvalidOperationException("The item already exsits");
+            }
+
             if (Head is null)
             {
                 Head = newNode;
@@ -98,7 +118,12 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
         public void InsertBeforeLast(Node newNode) 
         {
             if (Head is null) {
-                throw new IndexOutOfRangeException("The list has no elements");
+                throw new ArgumentOutOfRangeException("The list has no elements");
+            }
+
+            if (Contains(newNode))
+            {
+                throw new InvalidOperationException("The item already exsits");
             }
 
             if (Tail.Equals(Head))
@@ -131,7 +156,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             return GetEnumerator();
         }
 
-         public IEnumerator<Node> GetReverseEnumerator()
+        public IEnumerator<Node> GetReverseEnumerator()
         {
             ListReverseEnumerator = new ListReverseEnumerator(GetEnumerator());
             return ListReverseEnumerator;
@@ -141,7 +166,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
         {
             if (Head is null)
             {
-                throw new IndexOutOfRangeException("The list has no elements");
+                throw new ArgumentOutOfRangeException("The list has no elements");
             }
     
             Head = Head.Next;
@@ -163,7 +188,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
         {
             if (Head is null)
             {
-                throw new IndexOutOfRangeException("The list has no elements");
+                throw new ArgumentOutOfRangeException("The list has no elements");
             }
 
             Count--;
@@ -184,12 +209,12 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
         {
             if (Head is null)
             {
-                throw new IndexOutOfRangeException("The list has no elements");
+                throw new ArgumentOutOfRangeException("The list has no elements");
             }
 
             if (Head.Next is null)
             {
-                throw new IndexOutOfRangeException("The element is out of range");
+                throw new ArgumentOutOfRangeException("The element is out of range");
             }
 
             Count--;
@@ -211,7 +236,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
         {
             if (Head is null)
             {
-                throw new IndexOutOfRangeException("The list has no elements");
+                throw new ArgumentOutOfRangeException("The list has no elements");
             }
 
             IEnumerator<Node> enumerator = GetEnumerator();
@@ -223,6 +248,46 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             {
                 biggest = GetMax(biggest, enumerator.Current.Data);
             }
+        }
+
+        public void Clear()
+        {
+            Count   = 0;
+            Mooc    = new Node(0);
+            Head    = null;
+            Tail    = null;
+        }
+
+        public void Add(Node item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(Node item)
+        {
+            IEnumerator<Node> enumerator = GetEnumerator();
+
+            while(enumerator.MoveNext())
+            {
+                if (enumerator.Current.Data == item.Data)
+                {
+                    enumerator.Dispose();
+                    return true;
+                }
+            }
+
+            enumerator.Dispose();
+            return false;
+        }
+
+        public void CopyTo(Node[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(Node item)
+        {
+            throw new NotImplementedException();
         }
     }
 }

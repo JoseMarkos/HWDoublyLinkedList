@@ -24,7 +24,7 @@ namespace HWDoublyLinkedList.Tests.Delete {
         public void DeleteFirstListEmpty()  {
             List list = new List();
 
-            Assert.Throws<IndexOutOfRangeException>(
+            Assert.Throws<ArgumentOutOfRangeException>(
                 () => list.DeleteFirst()
             );
         }
@@ -56,7 +56,7 @@ namespace HWDoublyLinkedList.Tests.Delete {
         {
             List list = new List();
             
-            Assert.Throws<IndexOutOfRangeException>(
+            Assert.Throws<ArgumentOutOfRangeException>(
                 () => list.DeleteLast()
             );
         }
@@ -88,7 +88,7 @@ namespace HWDoublyLinkedList.Tests.Delete {
         {
             List list = new List();
             
-            Assert.Throws<IndexOutOfRangeException>(
+            Assert.Throws<ArgumentOutOfRangeException>(
                 () => list.DeleteAfterFirst()
             );
         }
@@ -99,7 +99,7 @@ namespace HWDoublyLinkedList.Tests.Delete {
             List list = new List();
             list.InsertFirst(new Node(1));
 
-            Assert.Throws<IndexOutOfRangeException>(
+            Assert.Throws<ArgumentOutOfRangeException>(
                 () => list.DeleteAfterFirst()
             );
         }
@@ -125,5 +125,7 @@ namespace HWDoublyLinkedList.Tests.Delete {
 
             Assert.Equal(HappyCase, list.Mooc.Next.Next.Data);
         }
+
+
     }
 }
