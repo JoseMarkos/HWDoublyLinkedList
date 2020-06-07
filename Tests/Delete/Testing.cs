@@ -52,17 +52,17 @@ namespace HWDoublyLinkedList.Tests.Delete {
         }
 
         [Fact]
-        public void DeleteLastEmptyList() 
+        public void DeleteLastEmptyList()
         {
             List list = new List();
-            
+
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => list.DeleteLast()
             );
         }
 
         [Fact]
-        public void DeleteLastOneChild() 
+        public void DeleteLastOneChild()
         {
             List list = new List();
             list.InsertFirst(new Node(1));
@@ -73,21 +73,21 @@ namespace HWDoublyLinkedList.Tests.Delete {
         }
 
         [Fact]
-        public void DeleteLastListNotEmpty() 
+        public void DeleteLastListNotEmpty()
         {
             List list = AddFirstAddAfterFirstAddAfterFirst();
             int HappyCase = list.Tail.Prev.Data;
             list.DeleteLast();
-            
+
             Assert.Equal(HappyCase, list.Tail.Data);
             Assert.Null(list.Tail.Next);
         }
 
         [Fact]
-        public void DeleteAfterFirstListEmpty() 
+        public void DeleteAfterFirstListEmpty()
         {
             List list = new List();
-            
+
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => list.DeleteAfterFirst()
             );
@@ -126,6 +126,36 @@ namespace HWDoublyLinkedList.Tests.Delete {
             Assert.Equal(HappyCase, list.Mooc.Next.Next.Data);
         }
 
+        [Fact]
+        public void DeleteBiggestListEmpty()
+        {
+            List list = new List();
 
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => list.DeleteBiggest()
+            );
+        }
+
+        [Fact]
+        public void DeleteBiggestOneChild()
+        {
+            List list = new List();
+            list.InsertFirst(new Node(1));
+            list.DeleteBiggest();
+            Assert.Null(list.Head);
+        }
+
+        [Fact]
+        public void DeleteBiggestListNotEmpty()
+        {
+            List list = AddFirstAddAfterFirstAddAfterFirst();
+            list.DeleteBiggest();
+            var enumerator = list.GetEnumerator();
+
+            while(enumerator.MoveNext())
+            {
+            }
+            Assert.Equal(2, enumerator.Current.Data);
+        }
     }
 }

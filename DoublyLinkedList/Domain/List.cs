@@ -23,7 +23,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 
         public bool IsReadOnly => throw new NotImplementedException();
 
-        public List () 
+        public List ()
         {
             Count = 0;
             Mooc = new Node(0);
@@ -39,23 +39,23 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
                 throw new InvalidOperationException("The item already exsits");
             }
 
-            if (Head != null) 
-            {   
+            if (Head != null)
+            {
                 newNode.Next = Head;
                 newNode.Next.Prev = newNode;
             }
 
-            Head = newNode; 
+            Head = newNode;
             Mooc.Next = Head;
 
-            if (Tail is null) 
+            if (Tail is null)
             {
                 Tail = Head;
             }
 
             Count++;
         }
-        
+
         public void InsertAfterFirst(Node newNode)
         {
             if (Head is null) {
@@ -83,7 +83,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             newNode.Prev = Head;
             Head.Next = newNode;
 
-            if (SetTailFlag) 
+            if (SetTailFlag)
             {
                 Tail = newNode;
             }
@@ -91,7 +91,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             Count++;
         }
 
-        public void InsertLast(Node newNode) 
+        public void InsertLast(Node newNode)
         {
             if (Contains(newNode))
             {
@@ -109,13 +109,13 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             }
 
             newNode.Prev = Tail;
-            newNode.Prev.Next = newNode;        
-            
+            newNode.Prev.Next = newNode;
+
             Tail = newNode;
             Count++;
         }
 
-        public void InsertBeforeLast(Node newNode) 
+        public void InsertBeforeLast(Node newNode)
         {
             if (Head is null) {
                 throw new ArgumentOutOfRangeException("The list has no elements");
@@ -130,7 +130,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             {
                 newNode.Next = Tail;
                 newNode.Next.Prev = newNode;
-                
+
                 Head = newNode;
                 Mooc.Next = Head;
                 Count++;
@@ -168,10 +168,10 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
             {
                 throw new ArgumentOutOfRangeException("The list has no elements");
             }
-    
+
             Head = Head.Next;
             Mooc.Next = Head;
-            
+
             if (Head is null)
             {
                 Tail = null;
@@ -199,7 +199,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
                 Head = null;
                 Mooc.Next = Head;
             }
-            else 
+            else
             {
                 Tail.Next = null;
             }
@@ -219,7 +219,7 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
 
             Count--;
             // two childs case
-            if (Head.Next.Next is null) 
+            if (Head.Next.Next is null)
             {
                 Head.Next = null;
                 Tail = Head;
@@ -239,15 +239,27 @@ namespace HWDoublyLinkedList.DoublyLinkedList.Domain
                 throw new ArgumentOutOfRangeException("The list has no elements");
             }
 
+            if (Count < 2)
+            {
+                Head = null;
+                Mooc.Next = Head;
+                return;
+            }
+
             IEnumerator<Node> enumerator = GetEnumerator();
             enumerator.MoveNext();
-            int biggest = enumerator.Current.Data;
-            int GetMax(int x, int current) => x > current? x : current;
+            Node biggest = enumerator.Current;
+            Node prevBiggest = null;
+            Node GetMax(Node current, Node next) => current.Data > next.Data? current : next;
 
             while(enumerator.MoveNext())
             {
-                biggest = GetMax(biggest, enumerator.Current.Data);
+                prevBiggest = biggest;
+                biggest = GetMax(biggest, enumerator.Current);
             }
+
+            prevBiggest.Next = biggest.Next;
+            enumerator.Dispose();
         }
 
         public void Clear()
